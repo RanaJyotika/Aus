@@ -42,3 +42,25 @@ export const generateBlogImageUploadURL = async (_req: Request, res: Response) =
     res.status(500).json({ error: 'Could not generate upload URL' });
   }
 };
+
+export const generateNewsletterUploadURL = async (_req: Request, res: Response) => {
+  try {
+    const fileName = `aus/newsletters/${uuid()}.pdf`;
+    const params = {
+      Bucket: process.env.DO_SPACES_BUCKET!,
+      Key: fileName,
+      Expires: 60,
+      ContentType: 'application/pdf',
+      // ACL: 'public-read',
+    };
+
+    const uploadURL = await s3.getSignedUrlPromise('putObject', params);
+
+    const publicURL = `https://${process.env.DO_SPACES_BUCKET}.${process.env.DO_SPACES_ENDPOINT}/${fileName}`;
+
+    res.json({ uploadURL, fileUrl: publicURL });
+  } catch (err) {
+    console.error('Error generating newsletter upload URL:', err);
+    res.status(500).json({ error: 'Failed to generate upload URL' });
+  }
+};

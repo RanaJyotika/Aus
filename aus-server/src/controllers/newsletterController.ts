@@ -1,16 +1,16 @@
 // src/controllers/newsletterController.ts
-import { Response } from "express";
+import { Response, Request } from "express";
 import Newsletter from "../models/NewsletterModel";
 
-// Extend Request type to include `file` from Multer
-import { Request as ExpressRequest } from "express";
-
-interface MulterRequest extends ExpressRequest {
-  file?: Express.Multer.File;
+interface AddNewsletterRequest extends Request {
+  body: {
+    name: string;
+    pdfUrl: string;
+  };
 }
 
 // Get all newsletters
-export const getAllNewsletters = async (_req: ExpressRequest, res: Response) => {
+export const getAllNewsletters = async (_req: Request, res: Response) => {
   try {
     const newsletters = await Newsletter.find().sort({ createdAt: -1 }); // Newest first
     res.json(newsletters);
@@ -21,35 +21,26 @@ export const getAllNewsletters = async (_req: ExpressRequest, res: Response) => 
 };
 
 // Add new newsletter
-export const addNewsletter = async (req: MulterRequest, res: Response) => {
+export const addNewsletter = async (req: AddNewsletterRequest, res: Response) => {
+  const { name, pdfUrl } = req.body;
+
+  if (!name || !pdfUrl) {
+    return res.status(400).json({ message: "Name and PDF URL are required." });
+  }
+
   try {
-    const { name } = req.body;
-
-    if (!name) {
-      return res.status(400).json({ message: "Name is required." });
-    }
-
-    if (!req.file) {
-      return res.status(400).json({ message: "PDF file is required." });
-    }
-
-    const pdfUrl = `/uploads/newsletters/${req.file.filename}`; // Public path
-    const newDoc = new Newsletter({
-      name,
-      pdfUrl,
-      createdAt: new Date(), // Ensure createdAt is set
-    });
-
+    const newDoc = new Newsletter({ name, pdfUrl });
     await newDoc.save();
-    res.status(201).json({ message: "Newsletter uploaded.", newsletter: newDoc });
+    res.status(201).json({ message: "Newsletter saved.", newsletter: newDoc });
   } catch (err) {
-    console.error("Add newsletter error:", err);
-    res.status(500).json({ message: "Failed to upload newsletter." });
+    console.error("Newsletter creation failed:", err);
+    res.status(500).json({ message: "Server error saving newsletter." });
   }
 };
 
+
 // Delete newsletter
-export const deleteNewsletter = async (req: ExpressRequest, res: Response) => {
+export const deleteNewsletter = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const newsletter = await Newsletter.findByIdAndDelete(id);

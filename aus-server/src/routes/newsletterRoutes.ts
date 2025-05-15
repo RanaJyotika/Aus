@@ -11,7 +11,7 @@ import { requireAuth, requireSuperAdmin } from "../middleware/auth";
 const router = express.Router();
 
 router.get("/", getAllNewsletters);
-router.post("/", requireAuth, uploadNewsletter.single("pdf"), addNewsletter);
+router.post("/", requireAuth, addNewsletter);
 router.delete("/:id", requireSuperAdmin, deleteNewsletter);
 
 export default router;

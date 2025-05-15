@@ -1,12 +1,11 @@
-// src/pages/Newsletter.tsx
+// Updated Newsletter.tsx (Frontend) with DigitalOcean Spaces upload integration
 import Layout from "./Layout";
 
 const Newsletter = () => {
     return <Layout pageContent={<NewsletterContent />} />;
 };
 
-
-// src/pages/NewsletterContent.tsx
+// NewsletterContent.tsx
 import {
     Box,
     TextField,
@@ -30,8 +29,9 @@ import { AiOutlineEye, AiOutlineDownload } from "react-icons/ai";
 import {
     fetchNewsletters,
     deleteNewsletter,
-    uploadNewsletter,
+    addNewsletter
 } from "../../API/newsletterApi";
+import { getNewsletterUploadUrl } from "../../API/uploadApi";
 
 interface Newsletter {
     _id: string;
@@ -44,7 +44,6 @@ const NewsletterContent = () => {
     const [newsletters, setNewsletters] = useState<Newsletter[]>([]);
     const [search, setSearch] = useState("");
     const [sort, setSort] = useState("newest");
-
     const [openDialog, setOpenDialog] = useState(false);
     const [openConfirmId, setOpenConfirmId] = useState<string | null>(null);
     const [newName, setNewName] = useState("");
@@ -71,11 +70,25 @@ const NewsletterContent = () => {
 
     const handleUpload = async () => {
         if (!newName || !file) return alert("Please provide name and PDF file.");
-        await uploadNewsletter(newName, file);
-        setOpenDialog(false);
-        setNewName("");
-        setFile(null);
-        loadNewsletters();
+
+        try {
+            const { uploadURL, fileUrl } = await getNewsletterUploadUrl(file.name, file.type);
+
+            await fetch(uploadURL, {
+                method: 'PUT',
+                headers: { 'Content-Type': file.type },
+                body: file
+            });
+
+            await addNewsletter(newName, fileUrl);
+            setOpenDialog(false);
+            setNewName("");
+            setFile(null);
+            loadNewsletters();
+        } catch (err) {
+            console.error("Newsletter upload failed", err);
+            alert("Newsletter upload failed");
+        }
     };
 
     const handleDownload = async (url: string, name: string) => {
@@ -148,13 +161,12 @@ const NewsletterContent = () => {
                             <Typography>{n.name}</Typography>
                         </CardContent>
                         <Box display="flex" gap={1}>
-                            <IconButton onClick={() => window.open(`http://localhost:5000${n.pdfUrl}`, "_blank")}>
+                            <IconButton onClick={() => window.open(n.pdfUrl, "_blank")}>
                                 <AiOutlineEye />
                             </IconButton>
-                            <IconButton onClick={() => handleDownload(`http://localhost:5000${n.pdfUrl}`, `${n.name}.pdf`)}>
+                            <IconButton onClick={() => handleDownload(n.pdfUrl, `${n.name}.pdf`)}>
                                 <AiOutlineDownload />
                             </IconButton>
-
                             <IconButton onClick={() => setOpenConfirmId(n._id)}>
                                 <MdDelete style={{ color: "white", backgroundColor: "black", borderRadius: "50%", padding: 6 }} />
                             </IconButton>

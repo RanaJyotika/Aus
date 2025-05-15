@@ -17,3 +17,9 @@ export const getBlogImageUploadURL = async (file: File) => {
   return data; // contains { uploadURL, fileUrl }
 };
 
+export const getNewsletterUploadUrl = async (fileName: string, filetype: string) => {
+  const res = await axiosInstance.get('/upload-newsletter', {
+    params: { filename: fileName, filetype },
+  });
+  return res.data; // { uploadURL, fileUrl }
+};

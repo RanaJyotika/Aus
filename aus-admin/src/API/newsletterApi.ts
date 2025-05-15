@@ -6,13 +6,9 @@ export const fetchNewsletters = async () => {
   return res.data;
 };
 
-export const uploadNewsletter = async (name: string, file: File) => {
-  const formData = new FormData();
-  formData.append("name", name);
-  formData.append("pdf", file);
-  const res = await axiosInstance.post("/newsletters", formData, {
-    headers: { "Content-Type": "multipart/form-data" },
-  });
+// NEW VERSION — expects `name` and `pdfUrl`
+export const addNewsletter = async (name: string, pdfUrl: string) => {
+  const res = await axiosInstance.post("/newsletters", { name, pdfUrl });
   return res.data;
 };
 
