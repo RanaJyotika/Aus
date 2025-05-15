@@ -6,6 +6,8 @@ import ViewAdmin from "./Components/Home/ViewAdmin";
 import Newsletter from "./Components/Home/Newsletter";
 import Blogs from "./Components/Home/Blogs";
 import BlogDetails from "./Components/Home/BlogsDetails";
+import Gallery from "./Components/Home/Gallery";
+import AlbumDetails from "./Components/Home/AlbumDetails";
 
 interface ProtectedRouteProps {
   element: React.ReactNode;
@@ -38,9 +40,11 @@ const App = () => {
       <Route path="/newsletter" element={<ProtectedRoute element={<Newsletter />} />} />
       <Route path="/blogs" element={<ProtectedRoute element={<Blogs />} />} />
       <Route path="/blogs/:id" element={<ProtectedRoute element={<BlogDetails />} />} />
+      <Route path="/gallery" element={<ProtectedRoute element={<Gallery />} />} />
+      <Route path="/gallery/:id" element={<AlbumDetails />} />
 
       {/* PNF later */}
-      <Route path="*" element={token ? <Navigate to="/home" /> : <Navigate to="/" />} />
+      {/* <Route path="*" element={token ? <Navigate to="/home" /> : <Navigate to="/" />} /> */}
     </Routes>
   )
 }

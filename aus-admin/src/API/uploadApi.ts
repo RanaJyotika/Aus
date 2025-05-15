@@ -23,3 +23,10 @@ export const getNewsletterUploadUrl = async (fileName: string, filetype: string)
   });
   return res.data; // { uploadURL, fileUrl }
 };
+
+export const getGalleryUploadUrl = async (filename: string, filetype: string) => {
+  const res = await axiosInstance.get("/upload-gallery", {
+    params: { filename, filetype },
+  });
+  return res.data; // { uploadURL, fileUrl }
+};

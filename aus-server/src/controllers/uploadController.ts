@@ -64,3 +64,31 @@ export const generateNewsletterUploadURL = async (_req: Request, res: Response) 
     res.status(500).json({ error: 'Failed to generate upload URL' });
   }
 };
+
+export const generateGalleryUploadURL = async (req: Request, res: Response) => {
+  try {
+    const { filename, filetype } = req.query;
+
+    if (!filename || !filetype) {
+      return res.status(400).json({ error: 'Filename and filetype are required' });
+    }
+
+    const fileExt = (filename as string).split('.').pop();
+    const fileName = `aus/gallery/${uuid()}.${fileExt}`;
+
+    const params = {
+      Bucket: process.env.DO_SPACES_BUCKET!,
+      Key: fileName,
+      Expires: 60,
+      ContentType: filetype as string,
+    };
+
+    const uploadURL = await s3.getSignedUrlPromise('putObject', params);
+    const fileUrl = `https://${process.env.DO_SPACES_BUCKET}.${process.env.DO_SPACES_ENDPOINT}/${fileName}`;
+
+    res.json({ uploadURL, fileUrl });
+  } catch (err) {
+    console.error('Failed to generate gallery upload URL:', err);
+    res.status(500).json({ error: 'Failed to generate upload URL' });
+  }
+};

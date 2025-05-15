@@ -8,6 +8,7 @@ import adminRoutes from './routes/adminRoutes'
 import newsletterRoutes from './routes/newsletterRoutes';
 import blogRoutes from './routes/blogRoutes';
 import uploadRoutes from './routes/uploadRoutes';
+import albumRoutes from './routes/albumRoutes';
 import cors from 'cors';
 import path from 'path';
 import fs from 'fs';
@@ -38,6 +39,7 @@ app.use("/uploads", express.static(path.join(__dirname, "../uploads"))); // for 
 app.use('/api/newsletters', newsletterRoutes); // ✅ This will prefix all newsletter routes
 app.use('/api/blogs', blogRoutes);
 app.use('/api', uploadRoutes);
+app.use('/api', albumRoutes);
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);

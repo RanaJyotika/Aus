@@ -10,7 +10,7 @@ import { requireAuth, requireSuperAdmin } from '../middleware/auth'; // ✅ use 
 const router = express.Router();
 
 // Any authenticated admin can fetch testimonials
-router.get('/', requireAuth, getAllTestimonials);
+router.get('/', getAllTestimonials);
 
 // Only authenticated admin can add testimonials (or use requireSuperAdmin if needed)
 router.post('/', requireAuth, createTestimonial);
