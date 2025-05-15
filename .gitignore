@@ -9,3 +9,4 @@ aus-server/.env
 
 # Optional: ignore log files
 *.log
+todo.txt

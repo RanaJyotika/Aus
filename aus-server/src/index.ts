@@ -7,6 +7,7 @@ import { bootstrapSuperAdmin } from './utils/bootstrapSuperAdmin';
 import adminRoutes from './routes/adminRoutes'
 import newsletterRoutes from './routes/newsletterRoutes';
 import blogRoutes from './routes/blogRoutes';
+import uploadRoutes from './routes/uploadRoutes';
 import cors from 'cors';
 import path from 'path';
 import fs from 'fs';
@@ -36,6 +37,7 @@ app.use('/api/admins', adminRoutes);
 app.use("/uploads", express.static(path.join(__dirname, "../uploads"))); // for accessing PDFs
 app.use('/api/newsletters', newsletterRoutes); // ✅ This will prefix all newsletter routes
 app.use('/api/blogs', blogRoutes);
+app.use('/api', uploadRoutes);
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);

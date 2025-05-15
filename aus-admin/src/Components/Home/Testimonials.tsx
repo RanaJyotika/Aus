@@ -1,3 +1,4 @@
+// updated Testimonials.tsx with upload functionality
 import { useEffect, useState } from 'react';
 import {
   Box,
@@ -19,8 +20,9 @@ import {
 } from '@mui/material';
 import { MdDelete } from 'react-icons/md';
 import Layout from './Layout';
-import { fetchTestimonials, deleteTestimonial } from '../../API/testimonialApi';
+import { fetchTestimonials, deleteTestimonial, addTestimonial } from '../../API/testimonialApi';
 import { useUser } from '../../Context/UserContext';
+import axiosInstance from '../../API/axiosInstance';
 
 interface Testimonial {
   _id: string;
@@ -43,8 +45,13 @@ const TestimonialsContent = () => {
   const [selectedTestimonialId, setSelectedTestimonialId] = useState<string | null>(null);
   const [confirmOpen, setConfirmOpen] = useState(false);
 
+  const [openDialog, setOpenDialog] = useState(false);
+  const [newName, setNewName] = useState('');
+  const [newMessage, setNewMessage] = useState('');
+  const [file, setFile] = useState<File | null>(null);
+
   const { admin, loading } = useUser();
-  if (loading) return null; // or loading spinner
+  if (loading) return null;
 
   const getTestimonials = async () => {
     try {
@@ -92,6 +99,52 @@ const TestimonialsContent = () => {
     }
   };
 
+  const handleUploadAndAdd = async () => {
+  if (!newName || !newMessage || !file) {
+    alert('All fields including image are required');
+    return;
+  }
+
+  try {
+    // 1. Get presigned upload URL
+    const { data } = await axiosInstance.get('/upload-url', {
+      params: {
+        filename: file.name,
+        filetype: file.type,
+      },
+    });
+
+    const { uploadURL, publicURL } = data;
+
+    // 2. Upload image to DigitalOcean Spaces
+    await fetch(uploadURL, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': file.type,
+      },
+      body: file,
+    });
+
+    // 3. Add testimonial to DB
+    await addTestimonial({
+      name: newName,
+      message: newMessage,
+      photo: publicURL,
+    });
+
+    alert('Testimonial added!');
+    setOpenDialog(false);
+    setNewName('');
+    setNewMessage('');
+    setFile(null);
+    getTestimonials();
+  } catch (err) {
+    console.error('Error uploading or saving testimonial:', err);
+    alert('Upload failed. Try again.');
+  }
+};
+
+
   const filteredTestimonials = testimonials
     .filter((t) => t.name.toLowerCase().includes(search.trim().toLowerCase()))
     .sort(handleSort);
@@ -99,14 +152,7 @@ const TestimonialsContent = () => {
   return (
     <Box p={3}>
       {/* Controls */}
-      <Box
-        display="flex"
-        flexWrap="wrap"
-        gap={2}
-        justifyContent="space-between"
-        alignItems="center"
-        mb={4}
-      >
+      <Box display="flex" flexWrap="wrap" gap={2} justifyContent="space-between" alignItems="center" mb={4}>
         <TextField
           label="Search by Name"
           variant="outlined"
@@ -117,11 +163,7 @@ const TestimonialsContent = () => {
 
         <FormControl sx={{ minWidth: 150 }}>
           <InputLabel>Sort By</InputLabel>
-          <Select
-            value={sortOption}
-            label="Sort By"
-            onChange={(e) => setSortOption(e.target.value)}
-          >
+          <Select value={sortOption} label="Sort By" onChange={(e) => setSortOption(e.target.value)}>
             <MenuItem value="az">A-Z</MenuItem>
             <MenuItem value="za">Z-A</MenuItem>
             <MenuItem value="newest">Newest</MenuItem>
@@ -129,11 +171,7 @@ const TestimonialsContent = () => {
           </Select>
         </FormControl>
 
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => alert('Add testimonial logic here')}
-        >
+        <Button variant="contained" color="primary" onClick={() => setOpenDialog(true)}>
           Add New Testimonial
         </Button>
       </Box>
@@ -141,22 +179,9 @@ const TestimonialsContent = () => {
       {/* Testimonial Cards */}
       <Box display="flex" flexWrap="wrap" gap={3} justifyContent="flex-start">
         {filteredTestimonials.map((testimonial) => (
-          <Box
-            key={testimonial._id}
-            sx={{
-              flex: '1 1 calc(33.33% - 24px)',
-              minWidth: 280,
-              maxWidth: 350,
-              position: 'relative',
-            }}
-          >
+          <Box key={testimonial._id} sx={{ flex: '1 1 calc(33.33% - 24px)', minWidth: 280, maxWidth: 350 }}>
             <Card sx={{ height: '100%', position: 'relative' }}>
-              <CardMedia
-                component="img"
-                height="180"
-                image={testimonial.photo}
-                alt={testimonial.name}
-              />
+              <CardMedia component="img" height="180" image={testimonial.photo} alt={testimonial.name} />
               <CardContent>
                 <Typography variant="h6" gutterBottom>
                   {testimonial.name}
@@ -166,20 +191,20 @@ const TestimonialsContent = () => {
                 </Typography>
               </CardContent>
 
-              {admin?.superadmin === true && <IconButton
-                onClick={() => confirmDelete(testimonial._id)}
-                sx={{
-                  position: 'absolute',
-                  top: 8,
-                  right: 8,
-                  backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                  '&:hover': {
-                    backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                  },
-                }}
-              >
-                <MdDelete style={{ color: 'white', fontSize: '1.2rem' }} />
-              </IconButton>}
+              {admin?.superadmin && (
+                <IconButton
+                  onClick={() => confirmDelete(testimonial._id)}
+                  sx={{
+                    position: 'absolute',
+                    top: 8,
+                    right: 8,
+                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                    '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.7)' },
+                  }}
+                >
+                  <MdDelete style={{ color: 'white', fontSize: '1.2rem' }} />
+                </IconButton>
+              )}
             </Card>
           </Box>
         ))}
@@ -188,13 +213,27 @@ const TestimonialsContent = () => {
       {/* Confirm Delete Dialog */}
       <Dialog open={confirmOpen} onClose={() => setConfirmOpen(false)}>
         <DialogTitle>Confirm Delete</DialogTitle>
-        <DialogContent>
-          Are you sure you want to delete this testimonial?
-        </DialogContent>
+        <DialogContent>Are you sure you want to delete this testimonial?</DialogContent>
         <DialogActions>
           <Button onClick={() => setConfirmOpen(false)}>Cancel</Button>
           <Button onClick={handleDeleteConfirmed} variant="contained" color="error">
             Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Add Testimonial Dialog */}
+      <Dialog open={openDialog} onClose={() => setOpenDialog(false)} fullWidth maxWidth="sm">
+        <DialogTitle>Add Testimonial</DialogTitle>
+        <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: 2, mt: 1 }}>
+          <TextField label="Name" value={newName} onChange={(e) => setNewName(e.target.value)} />
+          <TextField label="Message" value={newMessage} multiline minRows={3} onChange={(e) => setNewMessage(e.target.value)} />
+          <input type="file" accept="image/*" onChange={(e) => setFile(e.target.files?.[0] || null)} />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpenDialog(false)}>Cancel</Button>
+          <Button variant="contained" onClick={handleUploadAndAdd}>
+            Submit
           </Button>
         </DialogActions>
       </Dialog>
