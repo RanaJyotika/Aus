@@ -19,6 +19,8 @@ import {
 } from "@mui/material";
 import { fetchBlogs, createBlog } from "../../API/blogsApi";
 import Layout from "./Layout";
+import { getBlogImageUploadURL } from "../../API/uploadApi"; // 👈 Add this
+import { useNavigate } from "react-router-dom";
 
 interface Blog {
   _id: string;
@@ -29,22 +31,11 @@ interface Blog {
   images: string[];
 }
 
-const convertToBase64 = (file: File): Promise<string> => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result as string);
-    reader.onerror = error => reject(error);
-  });
+const Blogs = () => {
+  return <Layout pageContent={<BlogsContent />} />;
 };
 
-const Blogs = () => {
-  return (
-    <Layout pageContent={<BlogsContent />} />
-  )
-}
-
-export default Blogs
+export default Blogs;
 
 const BlogsContent = () => {
   const [searchTags, setSearchTags] = useState<string[]>([]);
@@ -55,7 +46,10 @@ const BlogsContent = () => {
   const [newTitle, setNewTitle] = useState("");
   const [newContent, setNewContent] = useState("");
   const [newTags, setNewTags] = useState<string[]>([]);
-  const [images, setImages] = useState<string[]>([]);
+  const [imageFiles, setImageFiles] = useState<File[]>([]);
+  const [imagePreviews, setImagePreviews] = useState<string[]>([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadBlogs();
@@ -85,6 +79,14 @@ const BlogsContent = () => {
     setSearchTags(searchTags.filter((tag) => tag !== tagToRemove));
   };
 
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const files = Array.from(e.target.files);
+      setImageFiles(files);
+      setImagePreviews(files.map((file) => URL.createObjectURL(file)));
+    }
+  };
+
   const handleCreateBlog = async () => {
     if (!newTitle.trim() || !newContent.trim()) {
       alert("Title and Content are required.");
@@ -92,31 +94,38 @@ const BlogsContent = () => {
     }
 
     try {
+      const uploadedImageURLs: string[] = [];
+
+      for (const file of imageFiles) {
+        const { uploadURL, fileUrl } = await getBlogImageUploadURL(file);
+
+        await fetch(uploadURL, {
+          method: "PUT",
+          headers: { "Content-Type": file.type },
+          body: file,
+        });
+
+        uploadedImageURLs.push(fileUrl);
+      }
+
       await createBlog({
         title: newTitle,
         content: newContent,
         tags: newTags,
-        images, // base64 images
+        images: uploadedImageURLs,
       });
-      alert("Blog created successfully!");
+
+      alert("Blog created!");
       setOpen(false);
       setNewTitle("");
       setNewContent("");
       setNewTags([]);
-      setImages([]);
+      setImageFiles([]);
+      setImagePreviews([]);
       loadBlogs();
     } catch (err) {
+      console.error("Blog upload failed:", err);
       alert("Failed to create blog");
-    }
-  };
-
-  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const files = Array.from(e.target.files);
-      const base64Images = await Promise.all(
-        files.map(file => convertToBase64(file))
-      );
-      setImages(base64Images);
     }
   };
 
@@ -151,11 +160,7 @@ const BlogsContent = () => {
 
         <FormControl sx={{ minWidth: 150 }}>
           <InputLabel>Sort By</InputLabel>
-          <Select
-            value={sortOption}
-            label="Sort By"
-            onChange={(e) => setSortOption(e.target.value)}
-          >
+          <Select value={sortOption} label="Sort By" onChange={(e) => setSortOption(e.target.value)}>
             <MenuItem value="newest">Newest</MenuItem>
             <MenuItem value="oldest">Oldest</MenuItem>
           </Select>
@@ -174,7 +179,7 @@ const BlogsContent = () => {
           <Box
             key={blog._id}
             sx={{ flex: "1 1 calc(50% - 24px)", minWidth: 300, maxWidth: 500, cursor: "pointer" }}
-            onClick={() => window.location.href = `/blogs/${blog._id}`}
+            onClick={() => navigate(`/blogs/${blog._id}`)}
           >
             <Card>
               <CardMedia
@@ -184,39 +189,41 @@ const BlogsContent = () => {
                 alt={blog.title}
               />
               <CardContent>
-                <Typography variant="h6" gutterBottom>{blog.title}</Typography>
+                <Typography variant="h6" gutterBottom>
+                  {blog.title}
+                </Typography>
                 <Typography variant="body2" color="text.secondary" sx={{
-                  display: '-webkit-box',
+                  display: "-webkit-box",
                   WebkitLineClamp: 2,
-                  WebkitBoxOrient: 'vertical',
-                  overflow: 'hidden'
-                }}>{blog.content}</Typography>
+                  WebkitBoxOrient: "vertical",
+                  overflow: "hidden"
+                }}>
+                  {blog.content}
+                </Typography>
                 <Box mt={2} display="flex" flexWrap="wrap" gap={1}>
-                  {blog.tags.slice(0, 5).map(tag => <Chip key={tag} label={tag} size="small" />)}
+                  {blog.tags.slice(0, 5).map((tag) => (
+                    <Chip key={tag} label={tag} size="small" />
+                  ))}
                 </Box>
-                <Typography variant="caption" display="block" mt={1}>{new Date(blog.createdAt).toDateString()}</Typography>
+                <Typography variant="caption" display="block" mt={1}>
+                  {new Date(blog.createdAt).toDateString()}
+                </Typography>
               </CardContent>
             </Card>
           </Box>
         ))}
       </Box>
 
-      {/* Create Blog Modal */}
+      {/* Add Blog Dialog */}
       <Dialog open={open} onClose={() => setOpen(false)} fullWidth maxWidth="sm">
         <DialogTitle>Add New Blog</DialogTitle>
         <DialogContent sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 1 }}>
           <TextField label="Title" value={newTitle} onChange={(e) => setNewTitle(e.target.value)} />
-          <TextField
-            label="Content"
-            multiline
-            minRows={4}
-            value={newContent}
-            onChange={(e) => setNewContent(e.target.value)}
-          />
+          <TextField label="Content" multiline minRows={4} value={newContent} onChange={(e) => setNewContent(e.target.value)} />
           <TextField
             label="Tags (comma separated)"
             value={newTags.join(", ")}
-            onChange={(e) => setNewTags(e.target.value.split(",").map(tag => tag.trim()))}
+            onChange={(e) => setNewTags(e.target.value.split(",").map((tag) => tag.trim()))}
           />
           <Button variant="outlined" component="label">
             Upload Images
@@ -224,19 +231,16 @@ const BlogsContent = () => {
           </Button>
 
           <Box display="flex" gap={1} flexWrap="wrap">
-            {images.map((img, idx) => (
-              <img
-                key={idx}
-                src={img}
-                alt="preview"
-                style={{ width: 80, height: 80, objectFit: "cover", borderRadius: 4 }}
-              />
+            {imagePreviews.map((img, idx) => (
+              <img key={idx} src={img} alt="preview" style={{ width: 80, height: 80, objectFit: "cover", borderRadius: 4 }} />
             ))}
           </Box>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpen(false)}>Cancel</Button>
-          <Button variant="contained" onClick={handleCreateBlog}>Create</Button>
+          <Button variant="contained" onClick={handleCreateBlog}>
+            Create
+          </Button>
         </DialogActions>
       </Dialog>
     </Box>

@@ -23,3 +23,22 @@ export const generateTestimonialUploadURL = async (_req: Request, res: Response)
     res.status(500).json({ error: 'Failed to generate upload URL' });
   }
 };
+
+export const generateBlogImageUploadURL = async (_req: Request, res: Response) => {
+  try {
+    const fileName = `aus/blogs/${uuid()}.jpg`; // ✅ folder for blogs
+    const params = {
+      Bucket: process.env.DO_SPACES_BUCKET!,
+      Key: fileName,
+      Expires: 60,
+      ContentType: 'image/jpeg',
+      // ACL: 'public-read',
+    };
+
+    const uploadURL = await s3.getSignedUrlPromise('putObject', params);
+    const publicURL = `https://${process.env.DO_SPACES_BUCKET}.${process.env.DO_SPACES_ENDPOINT}/${fileName}`;
+    res.json({ uploadURL, fileUrl: publicURL }); // match this naming in frontend
+  } catch (err) {
+    res.status(500).json({ error: 'Could not generate upload URL' });
+  }
+};

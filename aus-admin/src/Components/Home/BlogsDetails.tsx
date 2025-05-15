@@ -19,6 +19,7 @@ import { fetchBlogById, updateBlog, deleteBlog } from '../../API/blogsApi';
 
 import React from 'react'
 import Layout from './Layout';
+import { getBlogImageUploadURL } from '../../API/uploadApi';
 
 const BlogsDetails = () => {
   return (
@@ -81,25 +82,32 @@ const BlogDetailsContent = () => {
     setImages(images.filter((img) => img !== url));
   };
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
-    if (files && files.length > 0) {
-      const fileReaders = Array.from(files).map((file) => {
-        return new Promise<string>((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onloadend = () => resolve(reader.result as string);
-          reader.onerror = reject;
-          reader.readAsDataURL(file);
-        });
-      });
+    if (!files) return;
 
-      Promise.all(fileReaders)
-        .then((base64Images) => {
-          setImages([...images, ...base64Images]);
-        })
-        .catch(() => alert('Failed to convert image to base64'));
+    const uploadedUrls: string[] = [];
+
+    for (const file of Array.from(files)) {
+      try {
+        const { uploadURL, fileUrl } = await getBlogImageUploadURL(file);
+
+        await fetch(uploadURL, {
+          method: 'PUT',
+          headers: { 'Content-Type': file.type },
+          body: file,
+        });
+
+        uploadedUrls.push(fileUrl);
+      } catch (err) {
+        console.error('Upload failed for', file.name, err);
+        alert(`Failed to upload ${file.name}`);
+      }
     }
+
+    setImages(prev => [...prev, ...uploadedUrls]);
   };
+
 
   const handleSave = async () => {
     try {
