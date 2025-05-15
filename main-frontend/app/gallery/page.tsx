@@ -273,92 +273,180 @@
 //     </div> */
 // }
 
+// "use client";
+
+// import React from "react";
+// import { Timeline } from "@/components/ui/timeline";
+// import Footer from "@/components/LandingComps/Footer";
+// import Navbar from "@/components/LandingComps/Navbar";
+
+// const ImageGrid = ({
+//   images,
+//   onImageClick,
+// }: {
+//   images: string[];
+//   onImageClick?: (src: string) => void;
+// }) => (
+//   <div className="grid grid-cols-4 gap-4 mb-16">
+//     {images.map((src, index) => (
+//       <img
+//         key={index}
+//         src={src}
+//         alt="gallery"
+//         onClick={() => onImageClick?.(src)}
+//         className="h-20 md:h-44 lg:h-60 w-full rounded-lg object-cover cursor-pointer shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
+//       />
+//     ))}
+//   </div>
+// );
+
+// export default function TimelineDemo() {
+//   const commonImages = [
+//     "https://img.theweek.in/content/dam/week/news/sci-tech/2019/June/children-play-nature-kids-free-run-shut.jpg",
+//     "https://i.pinimg.com/474x/a1/71/b7/a171b70d08e23407122eecef27d6a01d.jpg",
+//     "https://st2.depositphotos.com/3243153/8048/i/950/depositphotos_80482382-stock-photo-kids-playing-in-a-park.jpg",
+//   ];
+
+//   const data = [
+//     {
+//       title: "Marathon 2025",
+//       content: <ImageGrid images={Array(16).fill(commonImages[0])} />,
+//     },
+//     {
+//       title: "Picnic 2024",
+//       content: <ImageGrid images={Array(16).fill(commonImages[1])} />,
+//     },
+//     {
+//       title: "Contest 2023",
+//       content: <ImageGrid images={Array(16).fill(commonImages[2])} />,
+//     },
+//   ];
+
+//   return (
+//     <div className="relative w-full overflow-clip mt-16">
+//       <Navbar />
+//       <section className="relative py-10 px-6 overflow-hidden">
+//         <div className="absolute top-0 left-0 w-64 h-64 rounded-full opacity-10 bg-gradient-radial -translate-x-1/2 -translate-y-1/2"></div>
+//         <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full opacity-10 bg-gradient-radial translate-x-1/3 translate-y-1/3"></div>
+
+//         <svg
+//           className="absolute top-10 right-10 w-32 h-32 text-primary-500 opacity-5"
+//           viewBox="0 0 200 200"
+//           xmlns="http://www.w3.org/2000/svg"
+//         >
+//           <path
+//             fill="currentColor"
+//             d="M42.7,-57.2C56.1,-45.7,68.1,-32.5,73.2,-16.9C78.3,-1.3,76.5,16.8,69,32C61.4,47.2,48,59.6,32.7,65.3C17.4,71.1,0.1,70.3,-16.9,66.8C-33.8,63.4,-50.5,57.4,-62.3,45.3C-74.1,33.2,-81.1,15.1,-79.5,-1.6C-78,-18.3,-67.9,-33.6,-55.1,-45.2C-42.2,-56.8,-26.6,-64.8,-10.8,-64C5,-63.3,29.3,-68.8,42.7,-57.2Z"
+//             transform="translate(100 100)"
+//           />
+//         </svg>
+
+//         <div className="container mx-auto max-w-9xl relative z-10">
+//           <div className="text-center">
+//             <h2
+//               className="text-4xl md:text-5xl font-bold mb-4"
+//               style={{ color: "var(--color-primary-dark)" }}
+//             >
+//               Our <span className="text-gradient">Gallery</span>
+//             </h2>
+//             <p
+//               className="text-lg max-w-xl mx-auto mb-4"
+//               style={{ color: "var(--color-text-muted)" }}
+//             >
+//               Explore our latest works and creative projects showcasing our
+//               expertise and innovation
+//             </p>
+//           </div>
+//           <Timeline data={data} />
+//         </div>
+//       </section>
+//       <Footer />
+//     </div>
+//   );
+// }
+
+
+
+
+// app/gallery/page.tsx
+
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Timeline } from "@/components/ui/timeline";
 import Footer from "@/components/LandingComps/Footer";
 import Navbar from "@/components/LandingComps/Navbar";
+import ImageGrid from "@/components/ui/ImageGrid";
+import VideoGrid from "@/components/ui/VideoGrid";
 
-const ImageGrid = ({
-  images,
-  onImageClick,
-}: {
-  images: string[];
-  onImageClick?: (src: string) => void;
-}) => (
-  <div className="grid grid-cols-4 gap-4 mb-16">
-    {images.map((src, index) => (
-      <img
-        key={index}
-        src={src}
-        alt="gallery"
-        onClick={() => onImageClick?.(src)}
-        className="h-20 md:h-44 lg:h-60 w-full rounded-lg object-cover cursor-pointer shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
-      />
-    ))}
-  </div>
-);
+type MediaItem = {
+  type: "image" | "video";
+  url: string;
+};
 
-export default function TimelineDemo() {
-  const commonImages = [
-    "https://img.theweek.in/content/dam/week/news/sci-tech/2019/June/children-play-nature-kids-free-run-shut.jpg",
-    "https://i.pinimg.com/474x/a1/71/b7/a171b70d08e23407122eecef27d6a01d.jpg",
-    "https://st2.depositphotos.com/3243153/8048/i/950/depositphotos_80482382-stock-photo-kids-playing-in-a-park.jpg",
-  ];
+type Album = {
+  _id: string;
+  name: string;
+  media: MediaItem[];
+};
 
-  const data = [
-    {
-      title: "Marathon 2025",
-      content: <ImageGrid images={Array(16).fill(commonImages[0])} />,
-    },
-    {
-      title: "Picnic 2024",
-      content: <ImageGrid images={Array(16).fill(commonImages[1])} />,
-    },
-    {
-      title: "Contest 2023",
-      content: <ImageGrid images={Array(16).fill(commonImages[2])} />,
-    },
-  ];
+export default function GalleryPage() {
+  const [albums, setAlbums] = useState<Album[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchAlbums = async () => {
+      try {
+        const res = await fetch(`http://localhost:5000/api/albums`);
+        const data = await res.json();
+        setAlbums(data);
+      } catch (err) {
+        console.error("Failed to load albums", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchAlbums();
+  }, []);
+
+  const generateTimelineData = () => {
+    return albums.map((album) => {
+      const images = album.media.filter((item) => item.type === "image").map((m) => m.url);
+      const videos = album.media.filter((item) => item.type === "video").map((m) => m.url);
+
+      return {
+        title: album.name,
+        content: (
+          <div className="space-y-8">
+            {images.length > 0 && (
+              <ImageGrid images={images} />
+            )}
+            {videos.length > 0 && (
+              <VideoGrid videos={videos} />
+            )}
+          </div>
+        ),
+      };
+    });
+  };
+
+  if (loading) {
+    return <div className="text-center py-32 text-gray-500">Loading gallery...</div>;
+  }
 
   return (
     <div className="relative w-full overflow-clip mt-16">
       <Navbar />
       <section className="relative py-10 px-6 overflow-hidden">
-        <div className="absolute top-0 left-0 w-64 h-64 rounded-full opacity-10 bg-gradient-radial -translate-x-1/2 -translate-y-1/2"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full opacity-10 bg-gradient-radial translate-x-1/3 translate-y-1/3"></div>
-
-        <svg
-          className="absolute top-10 right-10 w-32 h-32 text-primary-500 opacity-5"
-          viewBox="0 0 200 200"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fill="currentColor"
-            d="M42.7,-57.2C56.1,-45.7,68.1,-32.5,73.2,-16.9C78.3,-1.3,76.5,16.8,69,32C61.4,47.2,48,59.6,32.7,65.3C17.4,71.1,0.1,70.3,-16.9,66.8C-33.8,63.4,-50.5,57.4,-62.3,45.3C-74.1,33.2,-81.1,15.1,-79.5,-1.6C-78,-18.3,-67.9,-33.6,-55.1,-45.2C-42.2,-56.8,-26.6,-64.8,-10.8,-64C5,-63.3,29.3,-68.8,42.7,-57.2Z"
-            transform="translate(100 100)"
-          />
-        </svg>
-
-        <div className="container mx-auto max-w-9xl relative z-10">
-          <div className="text-center">
-            <h2
-              className="text-4xl md:text-5xl font-bold mb-4"
-              style={{ color: "var(--color-primary-dark)" }}
-            >
-              Our <span className="text-gradient">Gallery</span>
-            </h2>
-            <p
-              className="text-lg max-w-xl mx-auto mb-4"
-              style={{ color: "var(--color-text-muted)" }}
-            >
-              Explore our latest works and creative projects showcasing our
-              expertise and innovation
-            </p>
-          </div>
-          <Timeline data={data} />
+        <div className="text-center">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-primary-dark">
+            Our <span className="text-gradient">Gallery</span>
+          </h2>
+          <p className="text-lg max-w-xl mx-auto mb-4 text-muted">
+            Explore photos and videos from our past events and memories
+          </p>
         </div>
+        <Timeline data={generateTimelineData()} />
       </section>
       <Footer />
     </div>
