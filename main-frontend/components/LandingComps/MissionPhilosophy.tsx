@@ -124,20 +124,20 @@ export default function MissionPhilosophySection() {
       </div>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="container  mx-auto px-16 sm:px-6 lg:px-8 relative z-10">
         {/* Section Heading */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-14 md:mb-20"
+          className="text-center  mb-14 md:mb-10"
         >
           <h2 className="text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl md:text-5xl">
-            Guiding <span className="text-gradient">Principles</span>
+            Guiding <span className="py-4 text-gradient">Principles</span>
           </h2>
           <p
-            className="mt-4 max-w-2xl text-xl mx-auto"
+            className="mt-2 max-w-2xl text-xl mx-auto"
             style={{ color: "var(--color-text-muted)" }}
           >
             The core values that drive our approach to childcare and education.
@@ -146,7 +146,7 @@ export default function MissionPhilosophySection() {
         </motion.div>
 
         {/* Cards Grid */}
-        <div className="grid md:grid-cols-2 gap-10 md:gap-16">
+        <div className="grid md:grid-cols-2 gap-10 md:gap-4  px-36">
           {/* Reuse Card Code */}
           {[
             missionContent,
@@ -157,7 +157,7 @@ export default function MissionPhilosophySection() {
             <motion.div
               key={index}
               variants={cardVariants}
-              className="relative p-8 md:p-10 rounded-2xl shadow-xl overflow-hidden flex flex-col transition-all duration-300 backdrop-blur-sm"
+              className="relative p-8 md:p-2 rounded-2xl shadow-xl overflow-hidden flex flex-col transition-all duration-300 backdrop-blur-sm"
               style={{
                 backgroundColor: "rgba(255, 255, 255, 0.85)",
                 border: "1px solid rgba(221, 214, 254, 0.3)",

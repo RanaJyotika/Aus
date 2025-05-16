@@ -141,9 +141,9 @@ const contactDetails = [
 const menuLinks = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
-  { name: "Services", href: "/services" },
-  { name: "Projects", href: "/projects" },
-  { name: "Blog", href: "/blog" },
+  { name: "Blogs", href: "/blogs" },
+  { name: "Gallery", href: "/gallery" },
+  
 ];
 
 const serviceLinksData = [
@@ -240,7 +240,7 @@ export default function Footer() {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.1 }}
-      className=" pt-5 pb-3 overflow-hidden z-10" // <-- Added overflow-hidden here
+      className="  overflow-hidden z-10" // <-- Added overflow-hidden here
       style={{
         backgroundColor: "var(--color-accent-tint)",
         color: "var(--color-text)",
@@ -248,23 +248,23 @@ export default function Footer() {
     >
       <GradientBackground />
 
-      <div className="container px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="container px-4 sm:px-6 lg:px-8 relative z-10 ">
         {/* Logo & Social Media Row */}
         <motion.div
           variants={itemVariants}
-          className="flex flex-col md:flex-row justify-between items-center mb-16"
+          className="flex flex-col md:flex-row justify-between items-center mb-4"
         >
           <div className="mb-6 md:mb-0">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-4">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-2">
               <span className="text-gradient">Agency</span>
             </h2>
-            <p
+            {/* <p
               className="text-sm max-w-md"
               style={{ color: "var(--color-text-muted)" }}
             >
               Crafting digital experiences that inspire and elevate your brand
               to new heights.
-            </p>
+            </p> */}
           </div>
 
           <div className="flex space-x-4">
@@ -289,20 +289,20 @@ export default function Footer() {
           {/* Contact Column */}
           <motion.div variants={itemVariants} className="relative">
             <div className="space-y-4 relative z-10">
-              <h3
+              {/* <h3
                 className="text-xl font-bold mb-6 relative inline-block"
                 style={{ color: "var(--color-accent-glow)" }}
               >
                 Get In Touch
                 <div className="absolute bottom-0 left-0 w-1/2 h-1 bg-gradient-animation rounded-full"></div>
-              </h3>
+              </h3> */}
 
               {contactDetails.map((item, index) => (
                 <motion.div
                   key={index}
                   variants={itemVariants}
                   whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                  className="p-5 rounded-xl flex items-center space-x-4 transition-all duration-300"
+                  className="p-1 rounded-xl flex items-center space-x-4 transition-all duration-300"
                   style={{
                     backgroundColor: "var(--color-white)",
                     boxShadow: "0 4px 20px rgba(124, 58, 237, 0.08)",

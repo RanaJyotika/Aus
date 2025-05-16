@@ -195,43 +195,22 @@ export default function FAQSection() {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: isVisible ? 1 : 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center flex flex-col mb-16"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.5 }}
+          className="text-center  mb-14 md:mb-10"
         >
-          <motion.span
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 20 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className=" mb-3  font-semibold px-4 py-1.5 rounded-full text-sm"
-            style={{
-              background:
-                "linear-gradient(to right, var(--color-accent-tint), var(--color-primary-light))",
-              color: "var(--color-accent-glow)",
-            }}
-          >
-            Help Center
-          </motion.span>
-
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 20 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-gradient text-4xl md:text-5xl font-bold mb-4"
-          >
-            Frequently Asked Questions
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 20 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="max-w-2xl mx-auto text-lg"
+          <h2 className="text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl md:text-5xl">
+            Frequently asked <span className="py-4 text-gradient">Questions</span>
+          </h2>
+          <p
+            className="mt-2 max-w-2xl text-xl mx-auto"
             style={{ color: "var(--color-text-muted)" }}
           >
-            Find answers to common questions about our SEO services
-          </motion.p>
+            Find the answers to your queries.
+          </p>
+          <div className="w-24 h-1 bg-gradient-animation rounded-full mx-auto mt-6"></div>
         </motion.div>
 
         <motion.div

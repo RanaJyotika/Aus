@@ -137,7 +137,7 @@ export default function ContactSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="w-full  p-6 sm:p-8 md:p-10 rounded-2xl shadow-xl"
+            className="w-[60%] p-6 sm:p-8 md:p-8 rounded-2xl  shadow-2xl"
             style={{ 
               background: "var(--color-white)",
               boxShadow: "0 10px 40px rgba(124, 58, 237, 0.1)"
@@ -186,7 +186,7 @@ export default function ContactSection() {
                           field === "name" ? "Jane Smith" : "jane@example.com"
                         }
                         required
-                        className="w-full rounded-lg p-4 transition duration-300 ease-in-out border-2"
+                        className="w-full rounded-lg p-2 transition duration-300 ease-in-out border-2"
                         style={{
                           backgroundColor: "var(--color-off-white)",
                           borderColor:  "var(--color-accent-glow)",
