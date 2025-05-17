@@ -202,3 +202,28 @@
     background-position: 100% 50%;
   }
 }
+
+
+
+
+/* Apply to elements with the class 'thin-scrollbar' */
+.thin-scrollbar {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: rgba(100, 116, 139, 0.4) transparent; /* thumb color and track */
+}
+
+/* WebKit-based browsers */
+.thin-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.thin-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.thin-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 116, 139, 0.4); /* slate-500 with opacity */
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}

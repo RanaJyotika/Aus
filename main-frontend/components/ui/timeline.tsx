@@ -8,6 +8,7 @@ interface TimelineEntry {
 }
 
 export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
+  console.log(data);
   const ref = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
@@ -45,7 +46,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
 
   return (
     <div
-      className="w-full font-sans  md:px-4 h-[100vh] overflow-y-auto relative"
+      className="w-full font-sans  md:px-4 h-[100vh] overflow-y-auto relative thin-scrollbar "
       ref={containerRef}
     >
       <div ref={ref} className="relative max-w-8xl mx-auto pb-20 ">

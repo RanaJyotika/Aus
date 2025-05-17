@@ -140,7 +140,7 @@ export default function Navbar() {
         </div>
 
         {/* Login/Signup Button */}
-        <div className="hidden md:block">
+        {/* <div className="hidden md:block">
           <a
             href="/template"
             className="flex items-center space-x-2 px-4 py-2 rounded-full font-medium text-sm transition duration-300 ease-in-out hover:scale-105 shadow-lg"
@@ -162,7 +162,7 @@ export default function Navbar() {
             <User size={16} />
             <span>LOGIN / SIGNUP</span>
           </a>
-        </div>
+        </div> */}
       </nav>
 
       {/* Mobile menu */}
@@ -202,7 +202,7 @@ export default function Navbar() {
               ))}
             </div>
 
-            <div className="mt-auto">
+            {/* <div className="mt-auto">
               <a
                 href="/template"
                 className="flex items-center justify-center space-x-2 w-full py-3 rounded-lg font-medium transition duration-300 ease-in-out"
@@ -215,7 +215,7 @@ export default function Navbar() {
                 <User size={18} />
                 <span>LOGIN / SIGNUP</span>
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
       )}

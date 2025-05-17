@@ -211,7 +211,7 @@ const GradientBackground = () => {
       />
 
       {/* Wave divider */}
-      <div className="absolute top-0 inset-x-0">
+      {/* <div className="absolute top-0 inset-x-0">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1440 320"
@@ -221,7 +221,7 @@ const GradientBackground = () => {
         >
           <path d="M0,96L48,112C96,128,192,160,288,165.3C384,171,480,149,576,122.7C672,96,768,64,864,74.7C960,85,1056,139,1152,138.7C1248,139,1344,85,1392,58.7L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z" />
         </svg>
-      </div>
+      </div> */}
     </div>
   );
 };
