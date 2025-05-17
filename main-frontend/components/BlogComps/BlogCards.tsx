@@ -226,17 +226,18 @@ export default function BlogCards() {
           return (
             <div key={post._id} className="h-full">
               <CardContainer className="inter-var">
-                <CardBody className="bg-gradient-to-br from-[#39A4D8] to-[#2C3E94] relative group/card border-zinc-200 h-full rounded-xl p-6 border shadow-md hover:shadow-xl hover:shadow-slate-400 transition-all duration-300">
+                <CardBody className="bg-gradient-to-tl from-[#bce4f2] to-[#ffffff] relative group/card border-zinc-200 h-full rounded-xl p-8 border shadow-md hover:shadow-xl hover:shadow-slate-400 transition-all duration-300">
+                
                   <CardItem
                     translateZ="50"
-                    className="text-2xl font-bold text-slate-950 "
+                    className="text-4xl font-bold text-[#03045e] tracking-wider"
                   >
                     {post.title}
                   </CardItem>
                   <CardItem
                     as="p"
                     translateZ="60"
-                    className="text-slate-800 text-sm max-w-sm mt-2"
+                    className="text-[#000814] text-sm max-w-sm mt-2"
                   >
                     {post.content.slice(0, 100)}...
                   </CardItem>
@@ -246,28 +247,30 @@ export default function BlogCards() {
                         src={post.images?.[0] || "/placeholder.jpg"}
                         height="1000"
                         width="1000"
-                        className="h-full w-full object-cover transition-all duration-500 group-hover/card:scale-105"
+                        className="h-full w-full object-fit rounded-lg transition-all duration-500 group-hover/card:scale-105"
                         alt={post.title}
                       />
+                       {/* Optional overlay to match white bg and add contrast */}
+  <div className="absolute inset-0 bg-gradient-to- from-blue-950/40 via-black/30 to-transparent mix-blend-multiply shadow-lg shadow-black rounded-lg"></div>
                     </div>
                   </CardItem>
                   <div className="mt-6">
                     <CardItem
                       translateZ="40"
-                      className="flex items-center text-slate-800 text-xs gap-2"
+                      className="flex items-center text-[#000814] text-xs gap-2"
                     >
                       <UserIcon size={14} />
-                      <span>Admin</span>
+                      <span className="text-[#000814]">Admin</span>
                       <span className="mx-1">•</span>
                       <CalendarIcon size={14} />
-                      <span>{formattedDate}</span>
+                      <span className="text-[#000814]">{formattedDate}</span>
                     </CardItem>
                   </div>
                   <CardItem
                     translateZ={20}
                     as={Link}
                     href={`/blog/${post._id}`}
-                    className="flex items-center gap-1 text-sm font-medium text-white/80 mt-4 group/link"
+                    className="flex items-center gap-1 text-sm font-semibold text-[#000814] mt-4 group/link"
                   >
                     <span>Read more</span>
                     <ArrowRightIcon
@@ -277,6 +280,7 @@ export default function BlogCards() {
                   </CardItem>
                 </CardBody>
               </CardContainer>
+              
             </div>
           );
         })}

@@ -49,7 +49,7 @@ export default function BlogPage() {
     //   </div>
     // </div>
 
-   <section className="relative w-full min-h-screen overflow-hidden">
+    <section className="relative w-full min-h-screen overflow-hidden">
       {/* Background image with blue-ish dull effect */}
       <div className="absolute inset-0 z-0">
         <img
@@ -65,6 +65,7 @@ export default function BlogPage() {
       {/* Content goes above the background */}
       <div className="relative z-10">
         {/* <BlogHeader /> */}
+        <BlogHeader />
         <BlogCards />
       </div>
     </section>
