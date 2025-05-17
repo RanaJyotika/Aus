@@ -5,10 +5,10 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  plugins: [require("tailwind-scrollbar-hide")],
   darkMode: "class",
   theme: {
     extend: {
-      
       animation: {
         "scroll-right": "scrollRight 20s linear infinite",
 

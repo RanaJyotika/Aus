@@ -388,7 +388,7 @@ const Timeline = () => {
   const underlineVariants = {
     hidden: { width: "0%" },
     visible: {
-      width: "100%",
+      width: "60%",
       transition: {
         delay: 0.4,
         duration: 0.8,
@@ -444,7 +444,7 @@ const Timeline = () => {
   };
 
   return (
-    <div className="relative overflow-hidden min-h-screen py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-blue-100 via-blue-300 to-blue-100">
+    <div className="relative overflow-hidden min-h-screen py-8 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-blue-100 via-blue-300 to-blue-100">
       {/* Background Shapes */}
       <motion.div
         className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-blue-700 opacity-10 blur-3xl"
@@ -523,9 +523,9 @@ const Timeline = () => {
             animate={headlineControls}
             variants={headlineVariants}
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-blue-100 tracking-tight">
-              <span className="text-blue-800"> Newsletter</span>
-            </h1>
+            <h2 className="text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl md:text-5xl">
+              <span className="py-4 text-gradient">Newsletter</span>
+            </h2>
 
             <motion.div
               className="absolute -top-6 -left-8 text-blue-400 opacity-50"
@@ -566,7 +566,7 @@ const Timeline = () => {
           </motion.div>
 
           <motion.div
-            className="mt-2 mx-auto w-24 h-1 bg-gradient-to-r from-blue-400 via-blue-300 to-blue-400 rounded-full"
+            className="mt-2 mx-auto w-24 h-1 bg-gradient-to-r from-[#2C3E94] via-[#39A4D8] to-[#2C3E94] rounded-full"
             initial="hidden"
             animate={headlineControls}
             variants={underlineVariants}
