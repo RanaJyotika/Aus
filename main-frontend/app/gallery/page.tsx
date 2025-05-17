@@ -678,7 +678,7 @@ export default function GalleryPage() {
   }
 
   return (
-    <div className="relative overflow-hidden min-h-screen mt-16 bg-white text-gray-800 p-6 flex justify-center">
+    <div className="relative overflow-hidden min-h-screen mt-7  bg-white text-gray-800 p-6 flex justify-center">
       {/* Background Shapes similar to Contact page */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute bottom-10 left-10 w-32 h-32 rounded-full bg-[#3fb5dd] opacity-20 blur-2xl"></div>

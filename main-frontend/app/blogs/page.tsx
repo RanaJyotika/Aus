@@ -55,11 +55,11 @@ export default function BlogPage() {
         <img
           src="/gemini-kids.png"
           alt="kids"
-          className="w-full h-full object-cover filter brightness-50 contrast-75"
+          className="w-full h-full object-cover filter opacity-40 brightness-50 contrast-75"
         />
 
         {/* Optional blue tint overlay */}
-        <div className="absolute inset-0 bg-blue-500 opacity-30 mix-blend-multiply"></div>
+        {/* <div className="absolute inset-0 bg-blue-500 opacity-10 mix-blend-multiply"></div> */}
       </div>
 
       {/* Content goes above the background */}

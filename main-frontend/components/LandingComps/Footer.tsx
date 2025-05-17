@@ -364,7 +364,7 @@ export default function Footer() {
           {/* Links Column */}
           <motion.div
             variants={itemVariants}
-            className="flex gap-44"
+            className="flex gap-10 md:gap-44"
           >
             {[{ title: "Menu", links: menuLinks },
               { title: "Services", links: serviceLinksData },

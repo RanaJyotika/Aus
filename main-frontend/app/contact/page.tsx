@@ -244,7 +244,7 @@ export default function ContactUs() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-gray-800 p-6  flex items-center justify-center relative overflow-hidden mt-7">
+    <div className="min-h-screen bg-white text-gray-800 p-6  flex items-center justify-center relative overflow-hidden -mt-2">
       {/* Animated Shapes */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Primary animated shapes */}
@@ -281,7 +281,7 @@ export default function ContactUs() {
           className={`absolute top-[15rem] left-[15rem] w-7 h-7 bg-[#3fb5dd]  z-20 rotate-45 rounded- `}
         ></div> */}
         <div
-          className={`absolute top-[50px] rounded-xl right-2/3 w-10 h-10 bg-[#3fb5dd] opacity-15 rotate-12 z-20 transition-all duration-8000 delay-1500 ${
+          className={`absolute top-[100px] rounded-xl right-2/3 w-10 h-10 bg-[#3fb5dd] opacity-15 rotate-12 z-20 transition-all duration-8000 delay-1500 ${
             animateShapes2 ? "rotate-45" : "rotate-12"
           }`}
         ></div>
@@ -392,21 +392,21 @@ export default function ContactUs() {
             </h3>
 
             <div className="flex items-center space-x-4 p-2 hover:bg-blue-800 rounded-lg transition-all">
-              <div className="bg-[#3fb5dd] p-2 rounded-full">
+              <div className="bg-white p-2 rounded-full">
                 <Phone size={20} className="text-blue-900" />
               </div>
               <span>+1 234 567 890</span>
             </div>
 
             <div className="flex items-center space-x-4 p-2 hover:bg-blue-800 rounded-lg transition-all">
-              <div className="bg-[#3fb5dd] p-2 rounded-full">
+              <div className="bg-white p-2 rounded-full">
                 <Mail size={20} className="text-blue-900" />
               </div>
               <span>info@example.com</span>
             </div>
 
             <div className="flex items-center space-x-4 p-2 hover:bg-blue-800 rounded-lg transition-all">
-              <div className="bg-[#3fb5dd] p-2 rounded-full">
+              <div className="bg-white p-2 rounded-full">
                 <MapPin size={20} className="text-blue-900" />
               </div>
               <span>123 Main St, Anytown, USA</span>

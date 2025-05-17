@@ -45,7 +45,7 @@ export default function Navbar() {
         }}
       >
         {/* Logo */}
-        <div className="flex items-center space-x-3">
+        <div className="">
           {/* <div
             className="w-10 h-10 rounded-lg flex items-center justify-center shadow-lg"
             style={{
@@ -123,7 +123,7 @@ export default function Navbar() {
         </div>
 
         {/* Mobile menu button */}
-        <div className="md:hidden">
+        <div className="  md:hidden">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="p-2 rounded-lg"

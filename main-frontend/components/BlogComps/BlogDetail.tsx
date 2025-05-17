@@ -179,7 +179,7 @@ export default function BlogDetail({ blog }: { blog: Blog }) {
 
   return (
     // bg color
-    <div className="bg-gradient-to-b from-blue-200 via-blue-400 to-blue-100 min-h-screen text-[#092337] relative overflow-hidden mt-10">
+    <div className="bg-white min-h-screen text-[#092337] relative overflow-hidden mt-7">
       {/* Background animated blob */}
       <div
         className="absolute w-96 h-96 rounded-full bg-blue-200 opacity-20 blur-3xl"

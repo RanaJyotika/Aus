@@ -218,15 +218,15 @@ export default function BlogCards() {
   }, []);
 
   return (
-    <section className="relative z-10 px-4 pb-20 mt-4 md:mt-8 max-w-7xl mx-auto">
+    <section className="relative z-10 px-4 pb-20 mt-4 max-w-7xl mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {blogs.map((post) => {
           const formattedDate = format(new Date(post.createdAt), "MMM d, yyyy");
 
           return (
             <div key={post._id} className="h-full">
-              <CardContainer className="inter-var">
-                <CardBody className="bg-gradient-to-tl from-[#bce4f2] to-[#ffffff] relative group/card border-zinc-200 h-full rounded-xl p-8 border shadow-md hover:shadow-xl hover:shadow-slate-400 transition-all duration-300">
+              <CardContainer className="inter-var    ">
+                <CardBody className="bg-gradient-to-tl from-[#bce4f2] to-[#ffffff] relative group/card border-zinc-200 h-full border rounded-xl p-8  shadow-md hover:shadow-xl hover:shadow-slate-400 transition-all duration-300">
                 
                   <CardItem
                     translateZ="50"
@@ -242,7 +242,7 @@ export default function BlogCards() {
                     {post.content.slice(0, 100)}...
                   </CardItem>
                   <CardItem translateZ="100" className="w-full mt-4">
-                    <div className="h-60 w-full overflow-hidden rounded-xl">
+                    <div className="h-55 w-full overflow-hidden rounded-xl">
                       <img
                         src={post.images?.[0] || "/placeholder.jpg"}
                         height="1000"
@@ -259,9 +259,9 @@ export default function BlogCards() {
                       translateZ="40"
                       className="flex items-center text-[#000814] text-xs gap-2"
                     >
-                      <UserIcon size={14} />
+                      {/* <UserIcon size={14} />
                       <span className="text-[#000814]">Admin</span>
-                      <span className="mx-1">•</span>
+                      <span className="mx-1">•</span> */}
                       <CalendarIcon size={14} />
                       <span className="text-[#000814]">{formattedDate}</span>
                     </CardItem>
