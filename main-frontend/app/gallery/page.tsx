@@ -370,6 +370,233 @@
 
 // app/gallery/page.tsx
 
+// "use client";
+// import React, { useEffect, useState } from "react";
+// import { Timeline } from "@/components/ui/timeline";
+// import Footer from "@/components/LandingComps/Footer";
+// import { motion } from "framer-motion";
+// import ImageGrid from "@/components/ui/ImageGrid";
+// import VideoGrid from "@/components/ui/VideoGrid";
+
+// type MediaItem = {
+//   type: "image" | "video";
+//   url: string;
+// };
+
+// type Album = {
+//   _id: string;
+//   name: string;
+//   media: MediaItem[];
+// };
+
+// export default function GalleryPage() {
+//   const [albums, setAlbums] = useState<Album[]>([]);
+//   const [loading, setLoading] = useState(true);
+
+//   useEffect(() => {
+//     const fetchAlbums = async () => {
+//       try {
+//         const res = await fetch(`http://localhost:5000/api/albums`);
+//         const data = await res.json();
+//         setAlbums(data);
+//       } catch (err) {
+//         console.error("Failed to load albums", err);
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+//     fetchAlbums();
+//   }, []);
+
+//   const generateTimelineData = () => {
+//     return albums.map((album) => {
+//       const images = album.media
+//         .filter((item) => item.type === "image")
+//         .map((m) => m.url);
+//       const videos = album.media
+//         .filter((item) => item.type === "video")
+//         .map((m) => m.url);
+//       return {
+//         title: album.name,
+//         content: (
+//           <div className="space-y-4">
+//             {images.length > 0 && (
+//               <div className=" rounded-xl px-4">
+//                 <ImageGrid images={images} />
+//               </div>
+//             )}
+//             {videos.length > 0 && (
+//               <div className=" rounded-xl px-4 ">
+//                 <VideoGrid videos={videos} />
+//               </div>
+//             )}
+//           </div>
+//         ),
+//       };
+//     });
+//   };
+
+//   if (loading) {
+//     return (
+//       <div className="min-h-screen bg-gradient-to-b from-blue-100 via-blue-300 to-blue-100 flex items-center justify-center">
+//         <motion.div
+//           animate={{ scale: [1, 1.1, 1], opacity: [0.5, 1, 0.5] }}
+//           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+//           className="text-xl font-medium text-blue-600"
+//         >
+//           Loading gallery...
+//         </motion.div>
+//       </div>
+//     );
+//   }
+
+//   return (
+//     <div className="relative overflow-hidden min-h-screen mt-16  bg-gradient-to-b from-blue-100 via-blue-300 to-blue-100">
+//       {/* Background Shapes */}
+//       <motion.div
+//         className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-blue-700 opacity-10 blur-3xl"
+//         animate={{ scale: [1, 1.1, 1] }}
+//         transition={{ repeat: Infinity, duration: 8 }}
+//       />
+//       <motion.div
+//         className="absolute top-32 left-10 w-6 h-6 rounded-full bg-blue-700 opacity-20"
+//         animate={{ y: [0, -15, 0] }}
+//         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+//       />
+//       <motion.div
+//         className="absolute top-60 right-24 w-4 h-4 rounded-full bg-blue-700 opacity-30"
+//         animate={{ x: [0, 10, -5, 10, 0], y: [0, -10, 5, -15, 0] }}
+//         transition={{ duration: 12, repeat: Infinity }}
+//       />
+//       <motion.div
+//         className="absolute bottom-40 left-20 w-32 h-32 rounded-lg bg-blue-700 opacity-15 rotate-45"
+//         animate={{ rotate: 360 }}
+//         transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+//       />
+//       <motion.div
+//         className="absolute top-1/3 -right-40 w-64 h-64 rounded-full bg-white opacity-20"
+//         animate={{ scale: [1, 1.05, 1], opacity: [0.4, 0.7, 0.4] }}
+//         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+//       />
+//       <motion.div
+//         className="absolute bottom-20 right-10 w-20 h-20 rounded-md bg-blue-800 opacity-15 rotate-12"
+//         animate={{ y: [0, -15, 0] }}
+//         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+//       />
+
+//       <svg
+//         className="absolute top-1/4 left-12 opacity-5 w-24 h-24"
+//         viewBox="0 0 100 100"
+//       >
+//         <motion.path
+//           d="M50 15 L90 85 L10 85 Z"
+//           fill="rgba(147, 197, 253, 0.3)"
+//           animate={{ x: [0, 10, -5, 10, 0], y: [0, -10, 5, -15, 0] }}
+//           transition={{ duration: 12, repeat: Infinity }}
+//         />
+//       </svg>
+
+//       <svg
+//         className="absolute bottom-1/3 right-1/4 opacity-40 w-40 h-40"
+//         viewBox="0 0 100 100"
+//       >
+//         <motion.line
+//           x1="10"
+//           y1="10"
+//           x2="90"
+//           y2="90"
+//           stroke="rgba(147, 197, 253, 0.5)"
+//           strokeWidth="2"
+//           animate={{ scale: [1, 1.05, 1], opacity: [0.4, 0.7, 0.4] }}
+//           transition={{ duration: 8, repeat: Infinity }}
+//         />
+//         <motion.line
+//           x1="90"
+//           y1="10"
+//           x2="10"
+//           y2="90"
+//           stroke="rgba(147, 197, 253, 0.5)"
+//           strokeWidth="2"
+//           animate={{ scale: [1, 1.05, 1], opacity: [0.4, 0.7, 0.4] }}
+//           transition={{ duration: 8, repeat: Infinity }}
+//         />
+//       </svg>
+
+//       <div className="relative max-w-7xl mx-auto mb-4 z-10">
+//         <div className="text-center mt-8 mb-8">
+//           <motion.div
+//             className="inline-block relative"
+//             initial={{ opacity: 0, y: -20 }}
+//             animate={{ opacity: 1, y: 0 }}
+//             transition={{ duration: 0.8, ease: "easeOut" }}
+//           >
+//             <h2 className="text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl md:text-5xl">
+//               Our <span className="py-4 text-gradient">Gallery</span>
+//             </h2>
+
+//             <motion.div
+//               className="absolute -top-6 -left-8 text-blue-400 opacity-50"
+//               initial={{ opacity: 0, scale: 0 }}
+//               animate={{ opacity: 0.5, scale: 1 }}
+//               transition={{ delay: 0.5, duration: 0.5 }}
+//             >
+//               <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
+//                 <circle cx="12" cy="12" r="4" fill="currentColor" />
+//               </svg>
+//             </motion.div>
+
+//             <motion.div
+//               className="absolute -bottom-2 -right-6 text-blue-400 opacity-50"
+//               initial={{ opacity: 0, scale: 0 }}
+//               animate={{ opacity: 0.5, scale: 1 }}
+//               transition={{ delay: 0.7, duration: 0.5 }}
+//             >
+//               <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+//                 <path
+//                   d="M12 3L14.5 8.5L21 9.5L16.5 14L18 20.5L12 17.5L6 20.5L7.5 14L3 9.5L9.5 8.5L12 3Z"
+//                   fill="currentColor"
+//                 />
+//               </svg>
+//             </motion.div>
+//           </motion.div>
+
+//           <motion.div
+//             className="mt-2 mx-auto w-24 h-1 bg-gradient-to-r from-[#2C3E94] via-[#39A4D8] to-[#2C3E94] rounded-full"
+//             initial={{ width: "0%" }}
+//             animate={{ width: "50%" }}
+//             transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
+//           />
+
+//           <motion.p
+//             className="mt-6 text-lg text-cyan-800 max-w-xl mx-auto"
+//             initial={{ opacity: 0 }}
+//             animate={{ opacity: 1 }}
+//             transition={{ delay: 0.8, duration: 0.8 }}
+//           >
+//             Explore photos and videos from our past events and memories.
+//           </motion.p>
+//         </div>
+
+//         <motion.div
+//           initial={{ opacity: 0 }}
+//           animate={{ opacity: 1 }}
+//           transition={{ duration: 0.7, delay: 0.3 }}
+//           className=""
+//         >
+//           <Timeline data={generateTimelineData()} />
+//         </motion.div>
+//       </div>
+
+//       <Footer />
+//     </div>
+//   );
+// }
+
+
+
+
+
+
 "use client";
 import React, { useEffect, useState } from "react";
 import { Timeline } from "@/components/ui/timeline";
@@ -421,12 +648,12 @@ export default function GalleryPage() {
         content: (
           <div className="space-y-4">
             {images.length > 0 && (
-              <div className=" rounded-xl px-4">
+              <div className="rounded-xl px-4">
                 <ImageGrid images={images} />
               </div>
             )}
             {videos.length > 0 && (
-              <div className=" rounded-xl px-4 ">
+              <div className="rounded-xl px-4">
                 <VideoGrid videos={videos} />
               </div>
             )}
@@ -438,11 +665,11 @@ export default function GalleryPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-blue-100 via-blue-300 to-blue-100 flex items-center justify-center">
+      <div className="min-h-screen bg-white flex items-center justify-center">
         <motion.div
           animate={{ scale: [1, 1.1, 1], opacity: [0.5, 1, 0.5] }}
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-          className="text-xl font-medium text-blue-600"
+          className="text-xl font-medium text-[#39A4D8]"
         >
           Loading gallery...
         </motion.div>
@@ -451,78 +678,21 @@ export default function GalleryPage() {
   }
 
   return (
-    <div className="relative overflow-hidden min-h-screen mt-16  bg-gradient-to-b from-blue-100 via-blue-300 to-blue-100">
-      {/* Background Shapes */}
-      <motion.div
-        className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-blue-700 opacity-10 blur-3xl"
-        animate={{ scale: [1, 1.1, 1] }}
-        transition={{ repeat: Infinity, duration: 8 }}
-      />
-      <motion.div
-        className="absolute top-32 left-10 w-6 h-6 rounded-full bg-blue-700 opacity-20"
-        animate={{ y: [0, -15, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="absolute top-60 right-24 w-4 h-4 rounded-full bg-blue-700 opacity-30"
-        animate={{ x: [0, 10, -5, 10, 0], y: [0, -10, 5, -15, 0] }}
-        transition={{ duration: 12, repeat: Infinity }}
-      />
-      <motion.div
-        className="absolute bottom-40 left-20 w-32 h-32 rounded-lg bg-blue-700 opacity-15 rotate-45"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-      />
-      <motion.div
-        className="absolute top-1/3 -right-40 w-64 h-64 rounded-full bg-white opacity-20"
-        animate={{ scale: [1, 1.05, 1], opacity: [0.4, 0.7, 0.4] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="absolute bottom-20 right-10 w-20 h-20 rounded-md bg-blue-800 opacity-15 rotate-12"
-        animate={{ y: [0, -15, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-      />
+    <div className="relative overflow-hidden min-h-screen mt-16 bg-white text-gray-800 p-6 flex justify-center">
+      {/* Background Shapes similar to Contact page */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute bottom-10 left-10 w-32 h-32 rounded-full bg-[#3fb5dd] opacity-20 blur-2xl"></div>
+        <div className="absolute top-40 right-20 w-40 h-40 rounded-full bg-[#3fb5dd] opacity-20 blur-2xl"></div>
+        <div className="absolute top-1/3 right-1/4 w-52 h-52 rounded-full bg-[#3fb5dd] opacity-15 blur-2xl"></div>
+        {/* <div className="absolute top-[5rem] left-[47rem] w-3 h-3 rounded-full bg-[#3fb5dd] z-20"></div> */}
+        <div className="absolute top-3/4 left-2/3 w-20 h-20 rounded-full bg-[#3fb5dd] opacity-25 blur-xl"></div>
+        <div className="absolute top-[50px] right-2/3 w-10 h-10 bg-[#3fb5dd] opacity-15 rotate-45 z-20"></div>
+        <div className="absolute top-0 left-0 w-96 h-96 bg-[#3fb5dd] opacity-20 blur-2xl rounded-br-full"></div>
+        <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#3fb5dd] opacity-20 blur-2xl rounded-tl-full"></div>
+        <div className="absolute top-1/3 left-3/4 w-24 h-24 bg-[#3fb5dd] opacity-50 blur-xl z-20 rotate-45"></div>
+      </div>
 
-      <svg
-        className="absolute top-1/4 left-12 opacity-5 w-24 h-24"
-        viewBox="0 0 100 100"
-      >
-        <motion.path
-          d="M50 15 L90 85 L10 85 Z"
-          fill="rgba(147, 197, 253, 0.3)"
-          animate={{ x: [0, 10, -5, 10, 0], y: [0, -10, 5, -15, 0] }}
-          transition={{ duration: 12, repeat: Infinity }}
-        />
-      </svg>
-
-      <svg
-        className="absolute bottom-1/3 right-1/4 opacity-40 w-40 h-40"
-        viewBox="0 0 100 100"
-      >
-        <motion.line
-          x1="10"
-          y1="10"
-          x2="90"
-          y2="90"
-          stroke="rgba(147, 197, 253, 0.5)"
-          strokeWidth="2"
-          animate={{ scale: [1, 1.05, 1], opacity: [0.4, 0.7, 0.4] }}
-          transition={{ duration: 8, repeat: Infinity }}
-        />
-        <motion.line
-          x1="90"
-          y1="10"
-          x2="10"
-          y2="90"
-          stroke="rgba(147, 197, 253, 0.5)"
-          strokeWidth="2"
-          animate={{ scale: [1, 1.05, 1], opacity: [0.4, 0.7, 0.4] }}
-          transition={{ duration: 8, repeat: Infinity }}
-        />
-      </svg>
-
-      <div className="relative max-w-7xl mx-auto mb-4 z-10">
+      <div className="w-full max-w-7xl z-10">
         <div className="text-center mt-8 mb-8">
           <motion.div
             className="inline-block relative"
@@ -535,9 +705,9 @@ export default function GalleryPage() {
             </h2>
 
             <motion.div
-              className="absolute -top-6 -left-8 text-blue-400 opacity-50"
+              className="absolute -top-6 -left-8 text-[#39A4D8] opacity-60"
               initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 0.5, scale: 1 }}
+              animate={{ opacity: 0.6, scale: 1 }}
               transition={{ delay: 0.5, duration: 0.5 }}
             >
               <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
@@ -546,9 +716,9 @@ export default function GalleryPage() {
             </motion.div>
 
             <motion.div
-              className="absolute -bottom-2 -right-6 text-blue-400 opacity-50"
+              className="absolute -bottom-2 -right-6 text-[#0A2463] opacity-60"
               initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 0.5, scale: 1 }}
+              animate={{ opacity: 0.6, scale: 1 }}
               transition={{ delay: 0.7, duration: 0.5 }}
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -561,14 +731,14 @@ export default function GalleryPage() {
           </motion.div>
 
           <motion.div
-            className="mt-2 mx-auto w-24 h-1 bg-gradient-to-r from-[#2C3E94] via-[#39A4D8] to-[#2C3E94] rounded-full"
+            className="mt-2 mx-auto w-24 h-1 bg-gradient-to-r from-[#0A2463] via-[#39A4D8] to-[#0A2463] rounded-full"
             initial={{ width: "0%" }}
             animate={{ width: "50%" }}
             transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
           />
 
           <motion.p
-            className="mt-6 text-lg text-cyan-800 max-w-xl mx-auto"
+            className="mt-6 text-lg text-[#0A2463] max-w-xl mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8, duration: 0.8 }}
@@ -581,13 +751,11 @@ export default function GalleryPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className=""
+          className="rounded-2xl z-0 p-6 bg-[#39A4D8]/10 bg-opacity-10 backdrop-blur"
         >
           <Timeline data={generateTimelineData()} />
         </motion.div>
       </div>
-
-      <Footer />
     </div>
   );
 }
