@@ -82,7 +82,7 @@ export default function Hero() {
 
   return (
     <motion.section
-      className="relative min-h-[400px] w-full flex items-center justify-center overflow-hidden bg-gradient-to-b from-[#bfdbfe] to-[#60a5fa] py-16"
+      className="relative min-h-[400px] w-full flex items-center justify-center overflow-hidden bg-gradient-to-b from-[#60a5fa]to-[#bfdbfe]  py-16 "
       initial="hidden"
       animate="visible"
       variants={containerVariants}
@@ -103,7 +103,10 @@ export default function Hero() {
           className="text-3xl sm:text-5xl lg:text-6xl font-bold text-primary-dark leading-tight mb-6"
         >
           Built on{" "}
-          <FlipWords words={words} className="text-[#a78bfa] font-extrabold" />
+          <FlipWords
+            words={words}
+            className=" bg-gradient-to-r from-[#60a5fa] via-[#3c5fc0] to-[#60a5fa] font-extrabold "
+          />
           ,<br />
           driven by purpose.
         </motion.h1>
@@ -123,8 +126,15 @@ export default function Hero() {
           whileTap={{ scale: 0.95 }}
         >
           <button
-            className="hover:bg-[#a78bfa] text-white px-8 py-3 rounded-full text-lg font-semibold bg-[#7c3aed] transition-colors shadow-lg hover:shadow-xl"
+            className="hover:bg-[#a78bfa] text-white px-8 py-3 rounded-full text-lg font-semibold ] transition-colors shadow-lg hover:shadow-xl"
             onClick={() => (window.location.href = "/get-started")}
+            style={{
+              backgroundColor:
+                "linear-gradient(135deg, var(--gradient-purple-start), var(--gradient-blue-end))",
+              boxShadow: "0 4px 12px rgba(124, 58, 237, 0.5)",
+              background:
+                "linear-gradient(135deg, var(--gradient-purple-start), var(--gradient-blue-end))",
+            }}
           >
             Get Started
           </button>

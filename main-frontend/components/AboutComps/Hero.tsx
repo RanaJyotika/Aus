@@ -191,10 +191,28 @@ const NurtureChildcareHero = () => {
               through love, care, and learning.
             </p>
             <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
-              <button className="px-6 py-3 font-medium text-white transition-all bg-blue-600 rounded-full hover:bg-blue-700 hover:shadow-lg">
+              <button
+                className="px-6 py-3 font-medium text-white transition-all  rounded-full hover:shadow-lg"
+                style={{
+                  backgroundColor:
+                    "linear-gradient(135deg, var(--gradient-purple-start), var(--gradient-blue-end))",
+                  boxShadow: "0 4px 12px rgba(124, 58, 237, 0.25)",
+                  background:
+                    "linear-gradient(135deg, var(--gradient-purple-start), var(--gradient-blue-end))",
+                }}
+              >
                 Our Programs
               </button>
-              <button className=" hidden md:block px-6 py-3 font-medium text-blue-600 transition-all bg-white border border-blue-600 rounded-full hover:bg-blue-50 hover:shadow-md">
+              <button
+                className=" hidden md:block px-6 py-3 font-medium text-blue-600 transition-all bg-white border border-blue-600 rounded-full hover:bg-blue-50 hover:shadow-md"
+                style={{
+                  border:
+                    "linear-gradient(135deg, var(--gradient-purple-start), var(--gradient-blue-end))",
+                  boxShadow: "0 4px 12px rgba(124, 58, 237, 0.25)",
+                  textDecorationColor:
+                    "linear-gradient(135deg, var(--gradient-purple-start), var(--gradient-blue-end))",
+                }}
+              >
                 Contact Us
               </button>
             </div>

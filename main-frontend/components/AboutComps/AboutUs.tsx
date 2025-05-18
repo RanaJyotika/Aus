@@ -25,7 +25,7 @@ const AboutSection = () => {
   return (
     <section className=" h-[50vh] md:h-[90vh] mt-4  bg-gradient-to-b from-white to-blue-50  overflow-hidden">
       <div className="container mx-auto px-4 md:px-8">
-        <div className= "  flex flex-col lg:flex-row gap-12 ">
+        <div className="  flex flex-col lg:flex-row gap-12 ">
           {/* Left Column: Images & Experience Badge */}
           <motion.div
             className="lg:w-1/2 relative"
@@ -104,7 +104,7 @@ const AboutSection = () => {
             variants={fadeIn}
           >
             <motion.div
-              className="inline-block mb-3 px-4 py-2 bg-blue-100 text-blue-600 rounded-lg font-medium"
+              className="inline-block mb-3 px-4 py-1 bg-blue-100 text-blue-600 rounded-full font-medium"
               whileHover={{ scale: 1.05 }}
             >
               KNOW ABOUT US
@@ -117,7 +117,13 @@ const AboutSection = () => {
                 visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
               }}
             >
-              Committed to <span className="text-blue-600">Excellence</span>
+              Committed to{" "}
+              <span
+                className="text-accent-glow"
+              
+              >
+                Excellence
+              </span>
             </motion.h2>
 
             <motion.p
@@ -228,18 +234,18 @@ const AboutSection = () => {
 
             {/* Call to Action */}
             <div className="flex flex-wrap gap-4">
-              <motion.a
+              {/* <motion.a
                 href="#discover"
                 className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-all"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
               >
                 Discover More <ChevronRight size={16} />
-              </motion.a>
+              </motion.a> */}
 
               <motion.a
                 href="tel:+11236547890"
-                className="inline-flex items-center gap-2 border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-medium py-3 px-6 rounded-lg transition-all"
+                className="inline-flex items-center gap-2 border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-medium py-3 px-6 rounded-full transition-all"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
               >

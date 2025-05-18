@@ -177,19 +177,19 @@ const itemVariants = {
 export default function Founder() {
   return (
     <motion.section
-      className="min-h-screen bg-gradient-to-b from-[#0a1a33] to-[#1e3a8a] py-16 px-4 sm:px-6 lg:px-8 flex items-center"
+      className="min-h-[50vh] bg-gradient-to-b via-[#1e3a8a] from-[#39A4D8] to-[#39A4D8] py-16 px-4 sm:px-6 lg:px-8 flex items-center"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
     >
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         {/* Left - Image Section */}
-        <motion.div variants={itemVariants} className="relative">
-          <div className="relative w-full/2 md:w-full h-[250px] md:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
+        <motion.div variants={itemVariants} className="relative flex justify-center md:pl-12 pl-0">
+          <div className="relative w-full/2 md:w-[350px] h-[250px] md:h-[350px] rounded-2xl overflow-hidden shadow-2xl">
             <img
               src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
               alt="James Andrews"
-              className="w-full h-full object-cover transform transition-transform duration-500 hover:scale-105"
+              className="w-full/50 h-full/50 object-cover transform transition-transform duration-500 hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0a1a33]/60 to-transparent" />
           </div>
@@ -209,19 +209,11 @@ export default function Founder() {
             Meet The Founder
           </h2>
           <div className="w-20 h-1 bg-[#a78bfa] rounded-full" />
-          <p className="text-[#bfdbfe] text-lg leading-5 md:leading-relaxed">
-            James Andrews, the driving force behind Nurture Care, brings over a
-            decade of experience in digital marketing. His passion for
-            innovation and commitment to client success have been the
-            cornerstone of our growth. With a strategic vision and hands-on
-            approach, James inspires our team to consistently exceed
-            expectations and deliver exceptional results.
-          </p>
+
           {/* Badges */}
           <div className="flex flex-wrap gap-3">
             {[
               "Visionary Trainer",
-              "Empathetic Leader",
               "Creative Problem-solver",
               "Passionate Mentor",
             ].map((label, idx) => (
@@ -231,12 +223,29 @@ export default function Founder() {
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <Badge className="bg-gradient-to-r from-[#60a5fa] to-[#a78bfa] text-white px-4 py-2 text-sm font-medium rounded-full shadow-md hover:shadow-lg transition-shadow">
+                <Badge
+                  className=" text-white px-4 py-1 border-white border-1 text-sm font-medium rounded-full shadow-md hover:shadow-lg transition-shadow"
+                  style={{
+                    backgroundColor:
+                      "linear-gradient(135deg, var(--gradient-purple-start), var(--gradient-blue-end))",
+                    boxShadow: "0 4px 12px rgba(124, 58, 237, 0.25)",
+                    background:
+                      "linear-gradient(135deg, var(--gradient-purple-start), var(--gradient-blue-end))",
+                  }}
+                >
                   {label}
                 </Badge>
               </motion.div>
             ))}
           </div>
+          <p className="text-[#bfdbfe] text-lg leading-5 md:leading-relaxed">
+            James Andrews, the driving force behind Nurture Care, brings over a
+            decade of experience in digital marketing. His passion for
+            innovation and commitment to client success have been the
+            cornerstone of our growth. With a strategic vision and hands-on
+            approach, James inspires our team to consistently exceed
+            expectations and deliver exceptional results.
+          </p>
         </motion.div>
       </div>
     </motion.section>

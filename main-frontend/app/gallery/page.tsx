@@ -693,7 +693,7 @@ export default function GalleryPage() {
       </div>
 
       <div className="w-full max-w-7xl z-10">
-        <div className="text-center mt-8 mb-8">
+        <div className="text-center mt-8 ">
           <motion.div
             className="inline-block relative"
             initial={{ opacity: 0, y: -20 }}
@@ -738,7 +738,7 @@ export default function GalleryPage() {
           />
 
           <motion.p
-            className="mt-6 text-lg text-[#0A2463] max-w-xl mx-auto"
+            className="mt-3 text-lg text-[#0A2463] max-w-xl mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8, duration: 0.8 }}
@@ -751,7 +751,7 @@ export default function GalleryPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="rounded-2xl z-0 p-6 bg-[#39A4D8]/10 bg-opacity-10 backdrop-blur"
+          className="rounded-2xl z-0 p-6 "
         >
           <Timeline data={generateTimelineData()} />
         </motion.div>

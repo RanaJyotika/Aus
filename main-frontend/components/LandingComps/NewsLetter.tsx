@@ -322,7 +322,12 @@ const NewsletterSection = () => {
             <div className="mt-4 text-right">
               <a
                 href={newsletter.pdfUrl}
-                className="inline-flex items-center px-4 py-2 rounded-lg text-white bg-[#39A4D8] font-medium transition-all duration-300 hover:bg-[#2c8ab8] transform group-hover:-translate-y-1"
+                className="inline-flex items-center px-4 py-2 rounded-full text-white  font-medium transition-all duration-300  transform group-hover:-translate-y-1"
+                style={{
+                  backgroundColor: "linear-gradient(135deg, var(--gradient-purple-start), var(--gradient-blue-end))",
+                  boxShadow:"0 4px 12px rgba(124, 58, 237, 0.25)",
+                  background:"linear-gradient(135deg, var(--gradient-purple-start), var(--gradient-blue-end))"
+                }}
                 download
               >
                 <span>Download PDF</span>

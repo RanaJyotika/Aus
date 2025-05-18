@@ -85,7 +85,7 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
     <motion.div
       whileHover={{ y: -10 }}
       transition={{ type: "spring", stiffness: 150 }}
-      className="relative w-full max-w-sm p-6 rounded-2xl bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 shadow-xl text-blue-900"
+      className="relative w-[20rem] h-[12rem] max-w-sm p-6 rounded-2xl bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 shadow-xl text-blue-900"
     >
       <div className="flex items-center gap-4 mb-4">
         <img

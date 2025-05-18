@@ -123,7 +123,7 @@ export default function AboutSection() {
         <div className="container mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
           <motion.div
             variants={itemVariants}
-            className="text-center mb-16 md:mb-20"
+            className="text-center mb-16 md:mb-15"
           >
             <h2
               className="text-lg mb-4 font-semibold uppercase tracking-wider"

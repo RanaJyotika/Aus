@@ -168,9 +168,7 @@ export default function ContactSection() {
                         className="w-full resize-none rounded-lg p-4 transition duration-300 ease-in-out border-2"
                         style={{
                           backgroundColor: "var(--color-off-white)",
-                          borderColor: isFocused[field] 
-                            ? "var(--color-accent-glow)" 
-                            : "var(--color-primary-light)",
+                          borderColor: "var(--color-accent-glow)",
                           color: "var(--color-text)",
                         }}
                       ></textarea>

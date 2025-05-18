@@ -402,7 +402,7 @@ const Timeline = () => {
       </div>
 
       <div className="w-full max-w-6xl z-10">
-        <div className="text-center mt-8 mb-8">
+        <div className="text-center mt-8 ">
           <motion.div
             className="inline-block relative"
             initial={{ opacity: 0, y: -20 }}
@@ -447,7 +447,7 @@ const Timeline = () => {
           />
 
           <motion.p
-            className="mt-6 text-lg text-[#0A2463] max-w-xl mx-auto"
+            className="mt-3 text-lg text-[#0A2463] max-w-xl mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8, duration: 0.8 }}
@@ -458,7 +458,7 @@ const Timeline = () => {
         </div>
 
         <motion.div
-          className="relative rounded-2xl p-6 bg-white bg-opacity-70 backdrop-blur"
+          className="relative rounded-2xl p-6  bg-opacity-70 backdrop-blur"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
