@@ -190,6 +190,21 @@ import { CardContainer, CardBody, CardItem } from "../ui/3d-card";
 import { format } from "date-fns";
 import { CalendarIcon, UserIcon, ArrowRightIcon } from "lucide-react";
 import Link from "next/link";
+import ReactMarkdown from 'react-markdown';
+import remarkGfm      from 'remark-gfm';     // for tables, task‑lists, etc.
+
+// helper: strip markdown and grab first N words
+function teaser(md: string, wordCount = 4) {
+  const plain = md
+    .replace(/#+\s*/g, "")                       // strip headings
+    .replace(/\*\*?/g, "")                       // strip bold/italic
+    .replace(/`+/g, "")                          // strip code ticks
+    .replace(/!\[.*?\]\(.*?\)/g, "")             // strip images
+    .replace(/\[([^\]]+)\]\(.*?\)/g, "$1")       // keep link text
+    .trim();
+  const words = plain.split(/\s+/).slice(0, wordCount);
+  return words.join(" ") + (words.length >= wordCount ? "…" : "");
+}
 
 // Define the shape of blog data
 interface BlogPost {
@@ -220,52 +235,44 @@ export default function BlogCards() {
   return (
     <section className="relative z-10 px-4 pb-20 mt-4 md:mt-8 max-w-7xl mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {blogs.map((post) => {
+        {blogs.map(post => {
           const formattedDate = format(new Date(post.createdAt), "MMM d, yyyy");
-
           return (
             <div key={post._id} className="h-full">
               <CardContainer className="inter-var">
                 <CardBody className="bg-gradient-to-tl from-[#bce4f2] to-[#ffffff] relative group/card border-zinc-200 h-full rounded-xl p-8 border shadow-md hover:shadow-xl hover:shadow-slate-400 transition-all duration-300">
-                
-                  <CardItem
-                    translateZ="50"
-                    className="text-4xl font-bold text-[#03045e] tracking-wider"
-                  >
+
+                  {/* Title */}
+                  <CardItem translateZ="50" className="text-4xl font-bold text-[#03045e] tracking-wider">
                     {post.title}
                   </CardItem>
-                  <CardItem
-                    as="p"
-                    translateZ="60"
-                    className="text-[#000814] text-sm max-w-sm mt-2"
-                  >
-                    {post.content.slice(0, 100)}...
+
+                  {/* Teaser: first 4 words only */}
+                  <CardItem as="p" translateZ="60" className="text-sm mt-2 text-[#000814]">
+                    {teaser(post.content, 4)}
                   </CardItem>
+
+                  {/* Image */}
                   <CardItem translateZ="100" className="w-full mt-4">
                     <div className="h-60 w-full overflow-hidden rounded-xl">
                       <img
                         src={post.images?.[0] || "/placeholder.jpg"}
-                        height="1000"
-                        width="1000"
-                        className="h-full w-full object-fit rounded-lg transition-all duration-500 group-hover/card:scale-105"
                         alt={post.title}
+                        className="h-full w-full object-cover rounded-lg transition-all duration-500 group-hover/card:scale-105"
                       />
-                       {/* Optional overlay to match white bg and add contrast */}
-  <div className="absolute inset-0 bg-gradient-to- from-blue-950/40 via-black/30 to-transparent mix-blend-multiply shadow-lg shadow-black rounded-lg"></div>
+                      <div className="absolute inset-0 bg-gradient-to- from-blue-950/40 via-black/30 to-transparent mix-blend-multiply shadow-lg shadow-black rounded-lg"></div>
                     </div>
                   </CardItem>
+
+                  {/* Meta */}
                   <div className="mt-6">
-                    <CardItem
-                      translateZ="40"
-                      className="flex items-center text-[#000814] text-xs gap-2"
-                    >
-                      <UserIcon size={14} />
-                      <span className="text-[#000814]">Admin</span>
-                      <span className="mx-1">•</span>
-                      <CalendarIcon size={14} />
-                      <span className="text-[#000814]">{formattedDate}</span>
+                    <CardItem translateZ="40" className="flex items-center text-[#000814] text-xs gap-2">
+                      <UserIcon size={14} /><span>Admin</span><span className="mx-1">•</span>
+                      <CalendarIcon size={14} /><span>{formattedDate}</span>
                     </CardItem>
                   </div>
+
+                  {/* Read more */}
                   <CardItem
                     translateZ={20}
                     as={Link}
@@ -273,14 +280,11 @@ export default function BlogCards() {
                     className="flex items-center gap-1 text-sm font-semibold text-[#000814] mt-4 group/link"
                   >
                     <span>Read more</span>
-                    <ArrowRightIcon
-                      size={14}
-                      className="transform transition-transform duration-300 group-hover/link:translate-x-1"
-                    />
+                    <ArrowRightIcon size={14} className="transform transition-transform duration-300 group-hover/link:translate-x-1" />
                   </CardItem>
+
                 </CardBody>
               </CardContainer>
-              
             </div>
           );
         })}

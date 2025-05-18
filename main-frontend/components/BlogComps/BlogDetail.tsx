@@ -10,6 +10,8 @@ import {
 } from "lucide-react";
 import { motion, useAnimation } from "framer-motion";
 import { Search } from "lucide-react";
+import ReactMarkdown from 'react-markdown';
+
 
 type Blog = {
   title: string;
@@ -271,15 +273,15 @@ export default function BlogDetail({ blog }: { blog: Blog }) {
             ))}
           </div>
 
-          {/* Content */}
-          <div className="prose max-w-none text-[#092337] relative">
-            <div className="absolute -left-10 top-0 w-1 h-full bg-gradient-to-b from-blue-300 to-blue-100 rounded-full opacity-70" />
-            {blog.content.split("\n").map((para, index) => (
-              <p key={index} className="text-lg mb-4">
-                {para}
-              </p>
-            ))}
-          </div>
+        {/* Content */}
+<div className="prose max-w-none text-[#092337] relative">
+  <div className="absolute -left-10 top-0 w-1 h-full bg-gradient-to-b from-blue-300 to-blue-100 rounded-full opacity-70" />
+  <div className="text-lg mb-4">
+    <ReactMarkdown>
+      {blog.content}
+    </ReactMarkdown>
+  </div>
+</div>
         </div>
 
         {/* Right Section (Sidebar) */}
