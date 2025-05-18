@@ -233,7 +233,7 @@ export default function BlogCards() {
   }, []);
 
   return (
-    <section className="relative z-10 px-4 pb-20 mt-4 md:mt-8 max-w-7xl mx-auto">
+    <section className="relative z-10 px-4 pb-20 mt-4 max-w-7xl mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {blogs.map(post => {
           const formattedDate = format(new Date(post.createdAt), "MMM d, yyyy");
@@ -254,7 +254,7 @@ export default function BlogCards() {
 
                   {/* Image */}
                   <CardItem translateZ="100" className="w-full mt-4">
-                    <div className="h-60 w-full overflow-hidden rounded-xl">
+                    <div className="h-55 w-full overflow-hidden rounded-xl">
                       <img
                         src={post.images?.[0] || "/placeholder.jpg"}
                         alt={post.title}

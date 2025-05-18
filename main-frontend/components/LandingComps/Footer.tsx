@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { JSX, SVGProps } from "react";
+import Image from "next/image";
+import LOGO from "../../public/LOGO.png";
 
 // SVG Icons
 const EnvelopeIcon = (
@@ -252,11 +254,12 @@ export default function Footer() {
         {/* Logo & Social Media Row */}
         <motion.div
           variants={itemVariants}
-          className="flex flex-col md:flex-row justify-between items-center mb-4"
+          className="flex flex-col md:flex-row justify-between items-center mb-7"
         >
           <div className="mb-6 md:mb-0">
             <h2 className="text-2xl sm:text-3xl font-bold mb-2">
-              <span className="text-gradient">Agency</span>
+              <Image src={LOGO} alt="logo" />
+              {/* <img src={LOGO} alt="logo" /> */}
             </h2>
             {/* <p
               className="text-sm max-w-md"
@@ -361,7 +364,7 @@ export default function Footer() {
           {/* Links Column */}
           <motion.div
             variants={itemVariants}
-            className="flex gap-8"
+            className="flex gap-10 md:gap-44"
           >
             {[{ title: "Menu", links: menuLinks },
               { title: "Services", links: serviceLinksData },

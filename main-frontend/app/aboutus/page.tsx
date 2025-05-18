@@ -23,7 +23,6 @@ const about = () => {
       <Team />
       {/* <Gallery /> */}
       <FAQSection />
-      <Footer />
     </div>
   );
 };

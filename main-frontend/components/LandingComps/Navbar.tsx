@@ -8,9 +8,9 @@ const navLinks = [
   { name: "HOME", href: "/" },
   { name: "ABOUT", href: "/about" },
   { name: "GALLERY", href: "/gallery" },
-  { name: "BLOGS", href: "/blog" },
+  { name: "BLOGS", href: "/blogs" },
   { name: "NEWSLETTER", href: "/newsletter" },
-  { name: "GUIDE", href: "/blog" },
+  // { name: "GUIDE", href: "/blog" },
   { name: "CONTACT", href: "/contact" },
 ];
 
@@ -36,7 +36,7 @@ export default function Navbar() {
     <>
       {/* Main navbar */}
       <nav
-        className={`w-full px-6 py-2 fixed top-0 z-50 flex justify-between items-center backdrop-blur-xl rounded-b-xl ${isScrolled ? "backdrop-blur-md" : ""}`} 
+        className={`w-full px-6 py-2 fixed top-0 z-50 flex justify-start gap-70 items-center backdrop-blur-xl rounded-b-xl ${isScrolled ? "backdrop-blur-md" : ""}`} 
         style={{
           backgroundColor: isScrolled ? "rgba(15, 23, 42, 0.3)" : "transparent",
           border: isScrolled
@@ -45,7 +45,7 @@ export default function Navbar() {
         }}
       >
         {/* Logo */}
-        <div className="flex items-center space-x-3">
+        <div className="">
           {/* <div
             className="w-10 h-10 rounded-lg flex items-center justify-center shadow-lg"
             style={{
@@ -70,7 +70,7 @@ export default function Navbar() {
 
         {/* Desktop Nav Links */}
         <div
-          className="hidden md:flex items-center space-x-2 px-4 py-2 backdrop-blur-md rounded-full"
+          className="hidden md:flex items-center space-x-2 px-4 py-2 backdrop-blur-md rounded-full "
           style={{
             backgroundColor: "rgba(15, 23, 42, 0.7)",
             border: "1px solid rgba(124, 58, 237, 0.15)",
@@ -83,7 +83,7 @@ export default function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className="relative text-xs font-medium transition duration-300 ease-in-out px-3 py-2 rounded-full"
+              className="relative  text-xs font-medium transition duration-300 ease-in-out px-3 py-2 rounded-full"
               style={{
                 color:
                   isActive
@@ -123,7 +123,7 @@ export default function Navbar() {
         </div>
 
         {/* Mobile menu button */}
-        <div className="md:hidden">
+        <div className="  md:hidden">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="p-2 rounded-lg"
@@ -140,8 +140,8 @@ export default function Navbar() {
         </div>
 
         {/* Login/Signup Button */}
-        {/* <div className="hidden md:block">
-          <a
+        <div className="hidden md:block">
+          {/* <a
             href="/template"
             className="flex items-center space-x-2 px-4 py-2 rounded-full font-medium text-sm transition duration-300 ease-in-out hover:scale-105 shadow-lg"
             style={{
@@ -161,8 +161,8 @@ export default function Navbar() {
           >
             <User size={16} />
             <span>LOGIN / SIGNUP</span>
-          </a>
-        </div> */}
+          </a> */}
+        </div>
       </nav>
 
       {/* Mobile menu */}

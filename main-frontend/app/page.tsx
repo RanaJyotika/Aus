@@ -14,7 +14,6 @@ export default function Home() {
   
   return (
     <>
-      <Navbar />
       <Hero />
       {/* <HeroParallax /> */}
       <VideoSection />
@@ -24,7 +23,6 @@ export default function Home() {
       <NewsletterSection /> 
       <FAQ />
       <ContactForm />
-      <Footer />
     </>
   );
 }

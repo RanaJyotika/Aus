@@ -93,7 +93,7 @@ export default function ContactSection() {
     >
       <GradientBlobBackground />
 
-      <div className="container mx-auto w-full  px-2 sm:px-6 lg:px-8 relative z-10">
+      <div className="container mx-auto w-full  px-2  relative z-10">
         <div className="flex flex-col md:flex-row gap-12 md:gap-16 items-center">
           {/* Left Side - Text */}
           <div className="relative text-center md:text-left">
@@ -113,7 +113,7 @@ export default function ContactSection() {
                 Have a question or want to work together? Drop me a message and I'll get back to you soon.
               </p>
               
-              <div className="mt-10 flex flex-col sm:flex-row gap-4">
+              <div className="mt-10 flex flex-col px-4  sm:flex-row gap-4">
                 <div className="flex items-center gap-3 text-gray-600">
                   <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
@@ -137,7 +137,7 @@ export default function ContactSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="w-[60%] p-6 sm:p-8 md:p-8 rounded-2xl  shadow-2xl"
+            className="w-[90%] md:w-[60%] p-6 sm:p-8 md:p-8 rounded-2xl  shadow-2xl"
             style={{ 
               background: "var(--color-white)",
               boxShadow: "0 10px 40px rgba(124, 58, 237, 0.1)"
@@ -158,7 +158,7 @@ export default function ContactSection() {
                       <textarea
                         name={field}
                         id={field}
-                        rows={5}
+                        rows={3}
                         value={formData.message}
                         onChange={handleChange}
                         onFocus={() => handleFocus(field)}

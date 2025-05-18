@@ -18,7 +18,7 @@ const about = () => {
   <section className="py-4 px-4">
     <AboutUs />
   </section>
-    <Brands />
+    {/* <Brands /> */}
     <Founder />
     <Values />
       {/* <WorkTimeline /> */}
@@ -27,7 +27,6 @@ const about = () => {
       </section>
     {/* <Gallery /> */}
     <FAQSection />
-    <Footer />
 </div>
   )
 }

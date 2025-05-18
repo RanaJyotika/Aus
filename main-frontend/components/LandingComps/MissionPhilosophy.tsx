@@ -124,7 +124,7 @@ export default function MissionPhilosophySection() {
       </div>
 
       {/* Main Content */}
-      <div className="container  mx-auto px-16 sm:px-6 lg:px-8 relative z-10">
+      <div className="container mx-auto px-2  md:px-16 sm:px-6 lg:px-8 relative z-10">
         {/* Section Heading */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -146,7 +146,7 @@ export default function MissionPhilosophySection() {
         </motion.div>
 
         {/* Cards Grid */}
-        <div className="grid md:grid-cols-2 gap-10 md:gap-4  px-36">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-4 px-0 md:px-36">
           {/* Reuse Card Code */}
           {[
             missionContent,

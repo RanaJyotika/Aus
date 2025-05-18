@@ -7,7 +7,7 @@ import Timeline from "../../components/NewLetterComps/Timeline"; // Adjust path 
 
 function App() {
   return (
-    <div className="App mt-20">
+    <div className="App mt-7">
       <Timeline />
     </div>
   );
