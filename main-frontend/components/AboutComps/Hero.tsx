@@ -155,21 +155,21 @@ const NurtureChildcareHero = () => {
   }, []);
 
   return (
-    <section className="relative w-full overflow-hidden bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900 dark:to-blue-950 mt-20">
+    <section className="relative w-full overflow-hidden bg-gradient-to-br from-blue-50 to-blue-100 mt-20">
       {/* Decorative background elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-10 left-10 w-24 h-24 rounded-full bg-blue-200 opacity-40 animate-pulse"></div>
-        <div className="absolute bottom-20 right-20 w-32 h-32 rounded-full bg-blue-300 opacity-30 animate-pulse"></div>
+        <div className="absolute top-10 left-10 w-24 h-24 rounded-full bg-[#2C3E94] opacity-40 animate-pulse"></div>
+        <div className="absolute bottom-3 right-20 w-20 h-20 rounded-full bg-[#2C3E94] opacity-30 animate-pulse"></div>
 
         {/* Floating shapes */}
         <div className="absolute top-10 left-1/4 ">
-          <div className="w-6 h-6 bg-yellow-200 rounded-full opacity-60 animate-bounce"></div>
+          <div className="w-6 h-6 bg-yellow-500 rounded-full opacity-60 animate-bounce"></div>
         </div>
         <div className="absolute bottom-1/4 left-1/3 ">
-          <div className="w-8 h-8 bg-pink-200 rounded-full opacity-60 animate-float"></div>
+          <div className="w-8 h-8 bg-pink-500 rounded-full opacity-60 animate-float"></div>
         </div>
         <div className="absolute top-1/2 left-1/2 ">
-          <div className="w-10 h-10 bg-purple-200 rounded-full opacity-40 animate-pulse"></div>
+          <div className="w-10 h-10 bg-purple-500 rounded-full opacity-40 animate-pulse"></div>
         </div>
       </div>
 
@@ -183,10 +183,10 @@ const NurtureChildcareHero = () => {
                 : "opacity-0 translate-y-10"
             } transition-all duration-1000 ease-out`}
           >
-            <h1 className="text-4xl font-bold tracking-tight text-blue-200 md:text-5xl lg:text-6xl mb-4">
+            <h1 className="text-4xl font-bold tracking-tight text-[#2C3E94] md:text-5xl lg:text-6xl mb-4">
               Nurturing Growth, One Child at a Time
             </h1>
-            <p className="text-xl text-white md:text-2xl mb-8 max-w-xl mx-auto lg:mx-0">
+            <p className="text-xl text-slate-600 md:text-2xl mb-8 max-w-xl mx-auto lg:mx-0">
               At Nurture Childcare, we believe in building strong foundations
               through love, care, and learning.
             </p>

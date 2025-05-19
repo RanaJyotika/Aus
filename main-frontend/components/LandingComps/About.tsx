@@ -71,7 +71,7 @@ export default function AboutSection() {
           <div className="absolute inset-0 bg-gradient-to-br from-white via-indigo-50 to-purple-100 opacity-80 z-0"></div>
 
           {/* Large gradient circle */}
-          <div className="absolute -top-1/4 -right-1/4 w-2/3 h-2/3 rounded-full bg-gradient-radial opacity-10 z-0"></div>
+          <div className="absolute -top-1/4 -right-1/4 w-2/3 h-2/3 rounded-full  bg-[#3fb5dd] opacity-10 z-0"></div>
 
           {/* Small floating gradients */}
           <motion.div
@@ -91,7 +91,7 @@ export default function AboutSection() {
           ></motion.div>
 
           <motion.div
-            className="absolute bottom-1/4 right-20 w-16 h-16 rounded-full z-0"
+            className="absolute bottom-1/4 right-20 w-16 h-16  rounded-full z-0"
             style={{
               background: `linear-gradient(135deg, var(--gradient-blue-start), var(--gradient-purple-end))`,
             }}
@@ -113,7 +113,7 @@ export default function AboutSection() {
             preserveAspectRatio="none"
           >
             <path
-              fill="var(--color-accent-glow)"
+              fill="var(--color-primary-500)"
               fillOpacity="0.7"
               d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,202.7C1248,213,1344,171,1392,149.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
             ></path>

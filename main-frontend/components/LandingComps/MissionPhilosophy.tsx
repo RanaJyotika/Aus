@@ -146,7 +146,7 @@ export default function MissionPhilosophySection() {
         </motion.div>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-7 px-0 md:px-28">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-7 px-0 md:px-18">
           {/* Reuse Card Code */}
           {[
             missionContent,
@@ -219,7 +219,7 @@ export default function MissionPhilosophySection() {
 
 
               <p
-                className="text-lg leading-5 md:leading-relaxed"
+                className="text-lg leading-5 md:leading-6"
                 style={{ color: "var(--color-text-muted)" }}
               >
                 {content.description}

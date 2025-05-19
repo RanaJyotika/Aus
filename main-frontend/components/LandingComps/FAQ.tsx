@@ -5,8 +5,69 @@ import { motion, AnimatePresence } from "framer-motion";
 
 // Custom decorative shapes for background
 const BackgroundShapes = () => {
+  const [animateShapes, setAnimateShapes] = useState(false);
+    const [animateShapes2, setAnimateShapes2] = useState(false);
+  
+    // Toggle animations for shapes
+    useEffect(() => {
+      const intervalId = setInterval(() => {
+        setAnimateShapes((prev) => !prev);
+      }, 5000);
+  
+      const intervalId2 = setInterval(() => {
+        setAnimateShapes2((prev) => !prev);
+      }, 7000);
+  
+      return () => {
+        clearInterval(intervalId);
+        clearInterval(intervalId2);
+      };
+    }, []);
+  
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Animated Shapes */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Primary animated shapes */}
+        <div
+          className={`absolute bottom-10 left-10  w-32 h-32 rounded-full bg-[#3fb5dd] opacity-20 transition-all duration-5000 ${
+            animateShapes ? "translate-x-15" : "-translate-x-15"
+          }`}
+        ></div>
+        <div
+          className={`absolute top-40 right-20  w-40 h-40 rounded-full bg-[#3fb5dd] opacity-20 transition-all duration-5000 delay-1000 ${
+            animateShapes ? "-translate-y-10" : "translate-y-10"
+          }`}
+        ></div>
+        <div
+          className={`absolute top-1/3 right-1/4   w-52 h-52 rounded-full bg-[#3fb5dd] opacity-15 transition-all duration-5000 delay-2000 ${
+            animateShapes ? "translate-y-8" : "-translate-y-8"
+          }`}
+        ></div>
+
+        {/* Additional animated shapes */}
+       
+        <div
+          className={`absolute top-[400px] left-[250px] w-20 h-20 rounded-full  bg-[#3fb5dd] opacity-25 `}
+        ></div>
+
+        {/* Animated polygons */}
+        {/* <div
+          className={`absolute top-[15rem] left-[15rem] w-7 h-7 bg-[#3fb5dd]  z-20 rotate-45 rounded- `}
+        ></div> */}
+        <div
+          className={`absolute top-[100px] rounded-xl right-2/3 w-10 h-10  bg-[#3fb5dd] opacity-15 rotate-12 z-20 transition-all duration-8000 delay-1500 ${
+            animateShapes2 ? "rotate-45" : "rotate-12"
+          }`}
+        ></div>
+
+        {/* Static Shapes */}
+        <div className="absolute top-0 left-0 w-96 h-96 bg-[#3fb5dd] opacity-20 blur-2xl rounded-br-full"></div>
+        <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#3fb5dd] opacity-20 blur-2xl rounded-tl-full"></div>
+      </div>
+
+
+
       {/* Gradient blob top-right */}
       <div
         className="absolute -top-32 -right-32 w-96 h-96 rounded-full opacity-20 blur-3xl"

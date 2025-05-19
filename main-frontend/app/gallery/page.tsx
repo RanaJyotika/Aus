@@ -619,6 +619,8 @@ type Album = {
 export default function GalleryPage() {
   const [albums, setAlbums] = useState<Album[]>([]);
   const [loading, setLoading] = useState(true);
+  const [animateShapes, setAnimateShapes] = useState(true);
+  const [animateShapes2, setAnimateShapes2] = useState(false);
 
   useEffect(() => {
     const fetchAlbums = async () => {
@@ -634,6 +636,21 @@ export default function GalleryPage() {
     };
     fetchAlbums();
   }, []);
+
+   useEffect(() => {
+        const interval = setInterval(() => {
+          setAnimateShapes((prev) => !prev);
+        }, 5000);
+    
+        const interval2 = setInterval(() => {
+          setAnimateShapes2((prev) => !prev);
+        }, 7000);
+    
+        return () => {
+          clearInterval(interval);
+          clearInterval(interval2);
+        };
+      }, []);
 
   const generateTimelineData = () => {
     return albums.map((album) => {
@@ -679,17 +696,33 @@ export default function GalleryPage() {
 
   return (
     <div className="relative overflow-hidden min-h-screen mt-7  bg-white text-gray-800 p-6 flex justify-center">
-      {/* Background Shapes similar to Contact page */}
+      {/* Background Shapes like Contact Page */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute bottom-10 left-10 w-32 h-32 rounded-full bg-[#3fb5dd] opacity-20 blur-2xl"></div>
-        <div className="absolute top-40 right-20 w-40 h-40 rounded-full bg-[#3fb5dd] opacity-20 blur-2xl"></div>
+        <div
+          className={`absolute bottom-10 left-20 w-32 h-32 rounded-full bg-[#3fb5dd] opacity-20  transition-all duration-7000 delay-2000 ${
+            animateShapes ? "translate-x-15" : "-translate-x-15"
+          }`}
+        ></div>
+        <div
+          className={`absolute top-110 left-100 w-40 h-40 rounded-full bg-[#3fb5dd] opacity-20 transition-all duration-7000 delay-2000 ${
+            animateShapes2 ? "scale-110" : "scale-90"
+          }`}
+        ></div>
         <div className="absolute top-1/3 right-1/4 w-52 h-52 rounded-full bg-[#3fb5dd] opacity-15 blur-2xl"></div>
-        {/* <div className="absolute top-[5rem] left-[47rem] w-3 h-3 rounded-full bg-[#3fb5dd] z-20"></div> */}
-        <div className="absolute top-3/4 left-2/3 w-20 h-20 rounded-full bg-[#3fb5dd] opacity-25 blur-xl"></div>
-        <div className="absolute top-[50px] right-2/3 w-10 h-10 bg-[#3fb5dd] opacity-15 rotate-45 z-20"></div>
-        <div className="absolute top-0 left-0 w-96 h-96 bg-[#3fb5dd] opacity-20 blur-2xl rounded-br-full"></div>
-        <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#3fb5dd] opacity-20 blur-2xl rounded-tl-full"></div>
-        <div className="absolute top-1/3 left-3/4 w-24 h-24 bg-[#3fb5dd] opacity-50 blur-xl z-20 rotate-45"></div>
+        <div className="absolute top-[60px] right-2/3 w-10 h-10 bg-[#3fb5dd] opacity-15 rotate-45 z-20 "></div>
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-[#3fb5dd] opacity-20 blur-2xl  rounded-full"></div>
+        <div className="absolute -top-40 -left-40 w-96 h-96 bg-[#3fb5dd] opacity-20 blur-2xl  rounded-full"></div>
+        <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#3fb5dd] opacity-20 blur-2xl rounded-full"></div>
+        <div
+          className={`absolute top-[70px] left-3/4 w-24 h-24 bg-[#3fb5dd] opacity-20 rounded-full z-20 rotate-45  transition-all duration-7000 delay-1000 ${
+            animateShapes ? "translate-x-15" : "-translate-x-15"
+          }`}
+        ></div>
+        <div
+          className={`absolute top-3/4 left-2/3 w-20 h-20 rounded-full bg-[#3fb5dd] opacity-25 transition-all duration-7000 delay-2000 ${
+            animateShapes2 ? "scale-110" : "scale-90"
+          }`}
+        ></div>
       </div>
 
       <div className="w-full max-w-7xl z-10">
