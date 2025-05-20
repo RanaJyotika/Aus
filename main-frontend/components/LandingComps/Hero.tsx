@@ -8,151 +8,7 @@ import {
   MotionValue,
 } from "framer-motion";
 
-import  TestimonialCard from "./TestimonialCards";
-
-// const products = [
-//   {
-//     name: "Sarah Thompson",
-//     review:
-//       "This childcare service has been life-changing. My son loves the staff, and I feel confident in the education he's receiving.",
-//     rating: 5,
-//     date: "2024-12-20T09:00:00Z",
-//   },
-//   {
-//     name: "Sarah Thompson",
-//     review:
-//       "This childcare service has been life-changing. My son loves the staff, and I feel confident in the education he's receiving.",
-//     rating: 5,
-//     date: "2024-12-20T09:00:00Z",
-//   },
-//   {
-//     name: "Sarah Thompson",
-//     review:
-//       "This childcare service has been life-changing. My son loves the staff, and I feel confident in the education he's receiving.",
-//     rating: 5,
-//     date: "2024-12-20T09:00:00Z",
-//   },
-//   {
-//     name: "Sarah Thompson",
-//     review:
-//       "This childcare service has been life-changing. My son loves the staff, and I feel confident in the education he's receiving.",
-//     rating: 5,
-//     date: "2024-12-20T09:00:00Z",
-//   },
-//   {
-//     name: "Sarah Thompson",
-//     review:
-//       "This childcare service has been life-changing. My son loves the staff, and I feel confident in the education he's receiving.",
-//     rating: 5,
-//     date: "2024-12-20T09:00:00Z",
-//   },
-//   {
-//     name: "Sarah Thompson",
-//     review:
-//       "This childcare service has been life-changing. My son loves the staff, and I feel confident in the education he's receiving.",
-//     rating: 5,
-//     date: "2024-12-20T09:00:00Z",
-//   },
-//   {
-//     name: "Sarah Thompson",
-//     review:
-//       "This childcare service has been life-changing. My son loves the staff, and I feel confident in the education he's receiving.",
-//     rating: 5,
-//     date: "2024-12-20T09:00:00Z",
-//   },
-//   {
-//     name: "Sarah Thompson",
-//     review:
-//       "This childcare service has been life-changing. My son loves the staff, and I feel confident in the education he's receiving.",
-//     rating: 5,
-//     date: "2024-12-20T09:00:00Z",
-//   },
-//   {
-//     name: "Sarah Thompson",
-//     review:
-//       "This childcare service has been life-changing. My son loves the staff, and I feel confident in the education he's receiving.",
-//     rating: 5,
-//     date: "2024-12-20T09:00:00Z",
-//   },
-//   {
-//     name: "Sarah Thompson",
-//     review:
-//       "This childcare service has been life-changing. My son loves the staff, and I feel confident in the education he's receiving.",
-//     rating: 5,
-//     date: "2024-12-20T09:00:00Z",
-//   },
-//   {
-//     name: "Sarah Thompson",
-//     review:
-//       "This childcare service has been life-changing. My son loves the staff, and I feel confident in the education he's receiving.",
-//     rating: 5,
-//     date: "2024-12-20T09:00:00Z",
-//   },
-//   {
-//     name: "Sarah Thompson",
-//     review:
-//       "This childcare service has been life-changing. My son loves the staff, and I feel confident in the education he's receiving.",
-//     rating: 5,
-//     date: "2024-12-20T09:00:00Z",
-//   },
-//   {
-//     name: "Sarah Thompson",
-//     review:
-//       "This childcare service has been life-changing. My son loves the staff, and I feel confident in the education he's receiving.",
-//     rating: 5,
-//     date: "2024-12-20T09:00:00Z",
-//   },
-//   {
-//     name: "Sarah Thompson",
-//     review:
-//       "This childcare service has been life-changing. My son loves the staff, and I feel confident in the education he's receiving.",
-//     rating: 5,
-//     date: "2024-12-20T09:00:00Z",
-//   },
-//   {
-//     name: "Sarah Thompson",
-//     review:
-//       "This childcare service has been life-changing. My son loves the staff, and I feel confident in the education he's receiving.",
-//     rating: 5,
-//     date: "2024-12-20T09:00:00Z",
-//   },
-//   {
-//     name: "Sarah Thompson",
-//     review:
-//       "This childcare service has been life-changing. My son loves the staff, and I feel confident in the education he's receiving.",
-//     rating: 5,
-//     date: "2024-12-20T09:00:00Z",
-//   },
-//   {
-//     name: "Sarah Thompson",
-//     review:
-//       "This childcare service has been life-changing. My son loves the staff, and I feel confident in the education he's receiving.",
-//     rating: 5,
-//     date: "2024-12-20T09:00:00Z",
-//   },
-//   {
-//     name: "Sarah Thompson",
-//     review:
-//       "This childcare service has been life-changing. My son loves the staff, and I feel confident in the education he's receiving.",
-//     rating: 5,
-//     date: "2024-12-20T09:00:00Z",
-//   },
-//   {
-//     name: "Sarah Thompson",
-//     review:
-//       "This childcare service has been life-changing. My son loves the staff, and I feel confident in the education he's receiving.",
-//     rating: 5,
-//     date: "2024-12-20T09:00:00Z",
-//   },
-//   {
-//     name: "Sarah Thompson",
-//     review:
-//       "This childcare service has been life-changing. My son loves the staff, and I feel confident in the education he's receiving.",
-//     rating: 5,
-//     date: "2024-12-20T09:00:00Z",
-//   },
-// ];
-
+import TestimonialCard from "./TestimonialCards";
 
 type Testimonial = {
   _id: string;
@@ -166,9 +22,6 @@ type Testimonial = {
 export default function Hero() {
   const [alltestimonials, setAllTestimonials] = useState<Testimonial[]>([]);
   const [loading, setLoading] = useState(true);
-  // const firstRow = products.slice(0, 5);
-  // const secondRow = products.slice(6, 11);
-  // const thirdRow = products.slice(12, 17);
 
   const ref = React.useRef(null);
   const { scrollYProgress } = useScroll({
@@ -208,24 +61,24 @@ export default function Hero() {
 
 
 
-  
-    useEffect(() => {
-      const fetchTestimonials = async () => {
-        try {
-          const res = await fetch("http://localhost:5000/api/testimonials", );
-          if (!res.ok) throw new Error("Failed to fetch");
-          const data = await res.json();
-          setAllTestimonials(data);
-        } catch (err) {
-          console.error(err);
-        } finally {
-          setLoading(false);
-        }
-      };
-  
-      fetchTestimonials();
-    }, []);
-  
+
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/api/testimonials",);
+        if (!res.ok) throw new Error("Failed to fetch");
+        const data = await res.json();
+        setAllTestimonials(data);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTestimonials();
+  }, []);
+
 
 
   return (
@@ -244,12 +97,13 @@ export default function Hero() {
           translateY,
           opacity,
         }}
-        className=" hidden md:block  absolute top-[60%] md:top-[20%] left-[5%] w-[100%] pt-20 px-4 z-0 [perspective:1000px] [transform-style:preserve-3d]"
+        className="hidden md:block absolute top-[60%] md:top-[20%] left-[5%] w-[100%] pt-30 px-4 z-0 [perspective:1000px] [transform-style:preserve-3d] overflow-hidden"
       >
         <motion.div
-          className="flex flex-row-reverse space-x-reverse space-x-10 mb-10"
-          animate={{ x: ["0%", "-20%"] }}
+          className="flex flex-row-reverse space-x-reverse space-x-10 mb-0 pt-0"
+          animate={{ x: ["0%", "-50%"] }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          style={{width: '200%'}}
         >
           {loading ? (
             <p className="text-center text-gray-500">Loading testimonials...</p>
@@ -258,48 +112,43 @@ export default function Hero() {
               No testimonials available.
             </p>
           ) : (
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 justify-center">
-              {alltestimonials.map((testimonial) => (
-                <TestimonialCard
-                  key={testimonial._id}
-                  testimonial={{
-                    name: testimonial.name,
-                    review: testimonial.message,
-                    rating: 5, // static or derive from data if available
-                    date: testimonial.createdAt,
-                    avatar: testimonial.photo,
-                  }}
-                />
-              ))}
-            </div>
+            <>
+              {/* Original Testimonials */}
+              <div className="grid gap-8 sm:grid-rows-3 lg:grid-rows-3= mt-2 grid-flow-col justify-center">
+                {alltestimonials.map((testimonial) => (
+                  <TestimonialCard
+                    key={testimonial._id}
+                    testimonial={{
+                      name: testimonial.name,
+                      review: testimonial.message,
+                      rating: 5,
+                      date: testimonial.createdAt,
+                      avatar: testimonial.photo,
+                    }}
+                  />
+                ))}
+              </div>
+
+              {/* Duplicated Testimonials for seamless loop */}
+              <div className="grid gap-8 sm:grid-rows-3 lg:grid-rows-3 mt-2 grid-flow-col justify-center">
+                {alltestimonials.map((testimonial, index) => (
+                  <TestimonialCard
+                    key={`duplicate-${testimonial._id}-${index}`}
+                    testimonial={{
+                      name: testimonial.name,
+                      review: testimonial.message,
+                      rating: 5,
+                      date: testimonial.createdAt,
+                      avatar: testimonial.photo,
+                    }}
+                  />
+                ))}
+              </div>
+            </>
           )}
         </motion.div>
-
-        {/* <motion.div
-          className="flex flex-row space-x-10 mb-10"
-          animate={{ x: ["0%", "-20%"] }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-        >
-          {secondRow.map((product) => (
-            // <ProductCard
-            //   product={product}
-            //   translate={translateXReverse}
-            //   key={product.title}
-            <TestimonialCard testimonial={product} key={product.name} />
-            // />
-          ))}
-        </motion.div>
-
-        <motion.div
-          className="flex flex-row-reverse space-x-reverse space-x-10"
-          animate={{ x: ["0%", "-20%"] }}
-          transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
-        >
-          {thirdRow.map((product) => (
-            <TestimonialCard testimonial={product} key={product.name} />
-          ))}
-        </motion.div> */}
       </motion.div>
+
 
       <div className="relative z-5 flex top-55 flex-col items-center px-5">
         {/* Lamp Layer */}
@@ -429,38 +278,5 @@ export default function Hero() {
         </div>
       </div>
     </section>
-  );
-}
-
-// Single product card component
-function ProductCard({
-  product,
-  translate,
-}: {
-  product: {
-    title: string;
-    link: string;
-    thumbnail: string;
-  };
-  translate: MotionValue<number>;
-}) {
-  return (
-    <motion.div
-      style={{ x: translate }}
-      whileHover={{ y: -20 }}
-      className="group/product h-30 w-[8rem] md:h-60 md:w-[16rem]  relative shrink-0 rounded-lg overflow-hidden"
-    >
-      <a href={product.link} className="block">
-        <img
-          src={product.thumbnail}
-          alt={product.title}
-          className="object-cover object-left-top absolute h-full w-full inset-0 transition-transform duration-300"
-        />
-      </a>
-      <div className="absolute inset-0 h-full w-full opacity-0 group-hover/product:opacity-80 bg-black pointer-events-none transition duration-300" />
-      <h2 className="absolute bottom-4 left-4 opacity-0 group-hover/product:opacity-100 text-white text-xl font-semibold transition duration-300">
-        {product.title}
-      </h2>
-    </motion.div>
   );
 }

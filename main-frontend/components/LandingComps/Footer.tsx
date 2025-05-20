@@ -248,7 +248,7 @@ export default function Footer() {
         color: "var(--color-text)",
       }}
     >
-      <GradientBackground />
+      {/* <GradientBackground /> */}
 
       <div className="container px-4 sm:px-6 lg:px-8 relative z-10 ">
         {/* Logo & Social Media Row */}

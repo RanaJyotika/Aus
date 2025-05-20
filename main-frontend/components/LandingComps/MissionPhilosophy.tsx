@@ -146,7 +146,7 @@ export default function MissionPhilosophySection() {
         </motion.div>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-4 px-0 md:px-36">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-7 px-0 md:px-18">
           {/* Reuse Card Code */}
           {[
             missionContent,
@@ -157,7 +157,7 @@ export default function MissionPhilosophySection() {
             <motion.div
               key={index}
               variants={cardVariants}
-              className="relative p-8 md:p-2 rounded-2xl shadow-xl overflow-hidden flex flex-col transition-all duration-300 backdrop-blur-sm"
+              className="relative p-8 md:p-4 rounded-2xl shadow-xl overflow-hidden flex flex-col transition-all duration-300 backdrop-blur-sm"
               style={{
                 backgroundColor: "rgba(255, 255, 255, 0.85)",
                 border: "1px solid rgba(221, 214, 254, 0.3)",
@@ -219,7 +219,7 @@ export default function MissionPhilosophySection() {
 
 
               <p
-                className="text-lg leading-5 md:leading-relaxed"
+                className="text-lg leading-5 md:leading-6"
                 style={{ color: "var(--color-text-muted)" }}
               >
                 {content.description}

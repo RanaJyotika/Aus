@@ -36,7 +36,7 @@ export default function Navbar() {
     <>
       {/* Main navbar */}
       <nav
-        className={`w-full px-6 py-2 fixed top-0 z-50 flex justify-start gap-70 items-center backdrop-blur-xl rounded-b-xl ${isScrolled ? "backdrop-blur-md" : ""}`} 
+        className={`w-full px-6 py-2 fixed top-0 z-50 flex justify-start gap-80 items-center backdrop-blur-xl rounded-b-xl ${isScrolled ? "backdrop-blur-md" : ""}`} 
         style={{
           backgroundColor: isScrolled ? "rgba(15, 23, 42, 0.3)" : "transparent",
           border: isScrolled

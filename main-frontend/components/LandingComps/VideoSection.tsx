@@ -19,7 +19,7 @@ export default function VideoSection() {
       }}
     >
       {/* Animated Background */}
-      <div className="absolute inset-0 w-full h-full bg-gradient-to-t from-purple-200 via-indigo-100 to-transparent z-0"></div>
+      <div className="absolute inset-0 w-full h-full bg-gradient-to-t from-[#39A4D8] via-indigo-100 to-transparent z-0"></div>
 
       {/* Background Text */}
       <h1 className="absolute text-[#0F172A]/40 text-[8vw] font-bold whitespace-nowrap pointer-events-none animate-scroll-left text-center">

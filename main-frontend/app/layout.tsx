@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/LandingComps/Navbar";
 import Footer from "@/components/LandingComps/Footer";
 
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -15,8 +16,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "NC & ES",
-  description: "Nurture childcare and educatin service.",
+  title: "Nurture Childcare",
+  description: "Nurture childcare and education service.",
+  icons: {
+    icon: "/favicon.png", // path in the public/ directory
+  },
 };
 
 export default function RootLayout({
@@ -26,12 +30,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-      <Navbar />
+        <Navbar />
         {children}
-      <Footer />
+        <Footer />
       </body>
     </html>
   );

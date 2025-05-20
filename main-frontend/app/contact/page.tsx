@@ -232,6 +232,7 @@ export default function ContactUs() {
       clearInterval(interval2);
     };
   }, []);
+  
 
   const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
@@ -281,7 +282,7 @@ export default function ContactUs() {
           className={`absolute top-[15rem] left-[15rem] w-7 h-7 bg-[#3fb5dd]  z-20 rotate-45 rounded- `}
         ></div> */}
         <div
-          className={`absolute top-[100px] rounded-xl right-2/3 w-10 h-10 bg-[#3fb5dd] opacity-15 rotate-12 z-20 transition-all duration-8000 delay-1500 ${
+          className={`absolute top-[100px] rounded-xl right-2/3 w-10 h-10  bg-[#3fb5dd] opacity-15 rotate-12 z-20 transition-all duration-8000 delay-1500 ${
             animateShapes2 ? "rotate-45" : "rotate-12"
           }`}
         ></div>
