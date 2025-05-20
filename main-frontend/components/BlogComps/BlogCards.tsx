@@ -233,8 +233,8 @@ export default function BlogCards() {
   }, []);
 
   return (
-    <section className="relative z-10 px-4 pb-20 mt-4 max-w-7xl mx-auto">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+    <section className="relative z-10 px-4  max-w-7xl mx-auto ">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
         {blogs.map(post => {
           const formattedDate = format(new Date(post.createdAt), "MMM d, yyyy");
           return (
@@ -243,29 +243,29 @@ export default function BlogCards() {
                 <CardBody className="bg-gradient-to-tl from-[#bce4f2] to-[#ffffff] relative group/card border-zinc-200 h-full rounded-xl p-8 border shadow-md hover:shadow-xl hover:shadow-slate-400 transition-all duration-300">
 
                   {/* Title */}
-                  <CardItem translateZ="50" className="text-4xl font-bold text-[#03045e] tracking-wider">
+                  <CardItem translateZ="50" className="text-2xl font-bold text-[#03045e]">
                     {post.title}
                   </CardItem>
 
                   {/* Teaser: first 4 words only */}
-                  <CardItem as="p" translateZ="60" className="text-sm mt-2 text-[#000814]">
+                  {/* <CardItem as="p" translateZ="60" className="text-sm mt-2 text-[#000814]">
                     {teaser(post.content, 4)}
-                  </CardItem>
+                  </CardItem> */}
 
                   {/* Image */}
                   <CardItem translateZ="100" className="w-full mt-4">
-                    <div className="h-55 w-full overflow-hidden rounded-xl">
+                    <div className="aspect-w-16 aspect-h-9 overflow-hidden rounded-xl">
                       <img
                         src={post.images?.[0] || "/placeholder.jpg"}
                         alt={post.title}
-                        className="h-full w-full object-cover rounded-lg transition-all duration-500 group-hover/card:scale-105"
+                        className="h-full w-full object-fill rounded-lg transition-all duration-500 group-hover/card:scale-105"
                       />
                       <div className="absolute inset-0 bg-gradient-to- from-blue-950/40 via-black/30 to-transparent mix-blend-multiply shadow-lg shadow-black rounded-lg"></div>
                     </div>
                   </CardItem>
 
                   {/* Meta */}
-                  <div className="mt-6">
+                  <div className="mt-5">
                     <CardItem translateZ="40" className="flex items-center text-[#000814] text-xs gap-2">
                       <UserIcon size={14} /><span>Admin</span><span className="mx-1">•</span>
                       <CalendarIcon size={14} /><span>{formattedDate}</span>

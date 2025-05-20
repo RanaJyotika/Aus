@@ -13,6 +13,7 @@ const router = express.Router();
 router.get('/', getAllTestimonials);
 
 // Only authenticated admin can add testimonials (or use requireSuperAdmin if needed)
+
 router.post('/', requireAuth, createTestimonial);
 
 // Only authenticated super admin can delete testimonials

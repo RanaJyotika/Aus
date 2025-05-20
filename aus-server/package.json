@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon --exec ts-node src/index.ts",
     "set-policy": "ts-node src/scripts/setBucketPolicy.ts",
-     "seed-blogs": "ts-node src/scripts/seedBlogs.ts"
+     "seed-blogs": "ts-node src/scripts/seedBlogs.ts",
+     "seed-test":"ts-node src/scripts/seedTestimonials.ts"
   },
   "dependencies": {
     "aws-sdk": "^2.1692.0",

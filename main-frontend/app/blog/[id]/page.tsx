@@ -203,12 +203,24 @@
 
 
 // app/blog/[id]/page.tsx
+//fully dynamic no-caching (always loading fresh posts)
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 
 import BlogDetail from "../../../components/BlogComps/BlogDetail";
 
-export default async function BlogPage({ params }: { params: { id: string } }) {
-  const res = await fetch(`http://localhost:5000/api/blogs/${params.id}`, {
-    cache: "no-store", // Always fetch fresh
+export default async function BlogPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  // 1) await params
+  const { id } = await params;
+
+  // 2) now safe to use id
+  const res = await fetch(`http://localhost:5000/api/blogs/${id}`, {
+    cache: "no-store",
   });
 
   if (!res.ok) {
@@ -220,6 +232,24 @@ export default async function BlogPage({ params }: { params: { id: string } }) {
   }
 
   const blog = await res.json();
-
   return <BlogDetail blog={blog} />;
 }
+
+
+// export default async function BlogPage({ params }: { params: { id: string } }) {
+//   const res = await fetch(`http://localhost:5000/api/blogs/${params.id}`, {
+//     cache: "no-store", // Always fetch fresh
+//   });
+
+//   if (!res.ok) {
+//     return (
+//       <div className="text-center py-20 text-red-500">
+//         Failed to load blog post.
+//       </div>
+//     );
+//   }
+
+//   const blog = await res.json();
+
+//   return <BlogDetail blog={blog} />;
+// }
