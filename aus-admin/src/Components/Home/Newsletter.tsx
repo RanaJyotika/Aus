@@ -212,7 +212,7 @@
 // export default Newsletter;
 
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   TextField,
@@ -229,7 +229,7 @@ import {
   FormControl,
   InputLabel,
   Select,
-  LinearProgress,
+
 } from "@mui/material";
 import { MdDelete } from "react-icons/md";
 import { AiOutlineEye, AiOutlineDownload } from "react-icons/ai";

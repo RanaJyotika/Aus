@@ -296,7 +296,7 @@ import { fetchBlogById, updateBlog, deleteBlog } from '../../API/blogsApi';
 import React from 'react';
 import Layout from './Layout';
 import { getBlogImageUploadURL } from '../../API/uploadApi';
-import Loader from '../../utils/Loader';
+// import Loader from '../../utils/Loader';
 
 const BlogsDetails = () => {
   return <Layout pageContent={<BlogDetailsContent />} />;

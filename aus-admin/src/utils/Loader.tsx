@@ -1,52 +1,36 @@
-import React from "react";
+// src/utils/Loader.tsx
 
-interface LoaderProps {
-  progress?: number | null;
+import React from "react";
+import { Box, CircularProgress, Typography } from "@mui/material";
+
+export interface LoaderProps {
+  uploadProgress?: number;
+  uploading?: boolean;
 }
 
-const Loader: React.FC<LoaderProps> = ({ progress }) => {
+const Loader: React.FC<LoaderProps> = ({ uploadProgress, uploading }) => {
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        minHeight: "100vh",
-        backgroundColor: "rgba(255, 255, 255, 0.9)",
-        zIndex: 9999,
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: "100%",
-      }}
+    <Box
+      position="fixed"
+      top={0}
+      left={0}
+      width="100%"
+      height="100%"
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      bgcolor="rgba(0, 0, 0, 0.5)"
+      zIndex={2000}
+      flexDirection="column"
     >
-      <div
-        style={{
-          width: "64px",
-          height: "64px",
-          border: "4px dashed #3b82f6",
-          borderRadius: "50%",
-          animation: "spin 1s linear infinite",
-          marginBottom: "1rem",
-        }}
-      />
-      {typeof progress === "number" && (
-        <div style={{ fontSize: "1.25rem", fontWeight: "bold", color: "#3b82f6" }}>
-          {progress}% uploading...
-        </div>
+      <CircularProgress />
+      {uploading && uploadProgress !== undefined && (
+        <Typography mt={2} color="white">
+          Uploading... {uploadProgress.toFixed(0)}%
+        </Typography>
       )}
-      <style>
-        {`
-          @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-          }
-        `}
-      </style>
-    </div>
+    </Box>
   );
 };
 
 export default Loader;
-

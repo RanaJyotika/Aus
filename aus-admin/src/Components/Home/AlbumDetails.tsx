@@ -237,7 +237,7 @@ import {
     DialogTitle,
     DialogContent,
     DialogActions,
-    LinearProgress,
+    
     CircularProgress,
     Backdrop,
 } from "@mui/material";
@@ -250,7 +250,7 @@ import {
     deleteAlbum,
 } from "../../API/galleryApi";
 import { getGalleryUploadUrl } from "../../API/uploadApi";
-import Loader from "../../utils/Loader";
+
 
 interface MediaItem {
     type: "image" | "video";
@@ -268,7 +268,7 @@ const AlbumDetails = () => {
     const [loading, setLoading] = useState(true);
 
     const [uploading, setUploading] = useState(false);
-    const [uploadProgress, setUploadProgress] = useState(true);
+    const [uploadProgress, setUploadProgress] = useState(0);
     const [apiLoading, setApiLoading] = useState(false); // For update/delete APIs
 
     useEffect(() => {
