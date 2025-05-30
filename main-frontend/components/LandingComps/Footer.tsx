@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { JSX, SVGProps } from "react";
 import Image from "next/image";
 import LOGO from "../../public/LOGO.png";
+import BackgroundFooter from "./BgFooter";
 
 // SVG Icons
 const EnvelopeIcon = (
@@ -145,14 +146,19 @@ const menuLinks = [
   { name: "About", href: "/about" },
   { name: "Blogs", href: "/blogs" },
   { name: "Gallery", href: "/gallery" },
-  
 ];
 
 const serviceLinksData = [
-  { name: "ACECQA", href: "/services/web-development" },
-  { name: "CCS", href: "/services/ui-ux-design" },
-  { name: "CCS Calculator", href: "/services/branding" },
-  { name: "Starting Block", href: "/services/seo-marketing" },
+  { name: "ACECQA", href: "https://www.acecqa.gov.au/" },
+  {
+    name: "CCS",
+    href: "https://www.servicesaustralia.gov.au/child-care-subsidy",
+  },
+  {
+    name: "CCS Calculator",
+    href: "https://www.servicesaustralia.gov.au/how-much-child-care-subsidy-you-can-get?context=41186",
+  },
+  { name: "Starting Block", href: "https://startingblocks.gov.au/" },
 ];
 
 const legalLinksData = [
@@ -275,7 +281,7 @@ export default function Footer() {
               <Link
                 key={platform.name}
                 href={platform.href}
-                className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
+                className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 "
                 style={{
                   backgroundColor: "var(--color-white)",
                   color: "var(--color-accent-glow)",
@@ -287,7 +293,6 @@ export default function Footer() {
             ))}
           </div>
         </motion.div>
-
         <div className="grid lg:grid-cols-[40%_60%] gap-10 md:gap-16">
           {/* Contact Column */}
           <motion.div variants={itemVariants} className="relative">
@@ -362,27 +367,31 @@ export default function Footer() {
           </motion.div>
 
           {/* Links Column */}
-          <motion.div
-            variants={itemVariants}
-            className="flex gap-10 md:gap-44"
-          >
-            {[{ title: "Menu", links: menuLinks },
+          <motion.div variants={itemVariants} className="flex gap-10 md:gap-44">
+            {[
+              { title: "Menu", links: menuLinks },
               { title: "Services", links: serviceLinksData },
-              { title: "Legal", links: legalLinksData }].map((section) => (
+              { title: "Legal", links: legalLinksData },
+            ].map((section) => (
               <div key={section.title}>
                 <h3
-                  className="text-lg font-bold mb-6 relative inline-block"
+                  className="text-lg font-bold mb-6 relative inline-block "
                   style={{ color: "var(--color-accent-glow)" }}
                 >
                   {section.title}
-                  <div className="absolute bottom-0 left-0 w-1/2 h-1 bg-gradient-animation rounded-full"></div>
+                  <div className="absolute bottom-0 left-0 w-2/2 h-1 bg-gradient-animation rounded-full"></div>
                 </h3>
                 <ul className=" space-y-0 md:space-y-3">
                   {section.links.map((link) => (
                     <li key={link.name}>
                       <Link
                         href={link.href}
-                        className="flex items-center transition-all duration-300 hover:translate-x-1"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center transition-all duration-300 hover:translate-x-1 hover:underline"
+                        style={{
+                          textDecorationColor: "var(--color-text-muted)",
+                        }}
                       >
                         <div className="mr-2 w-1 h-1 rounded-full bg-gradient-animation"></div>
                         <span style={{ color: "var(--color-text-muted)" }}>
@@ -396,7 +405,7 @@ export default function Footer() {
             ))}
           </motion.div>
         </div>
-
+        {/* 
         <motion.div
           variants={itemVariants}
           className="mt-6 pt-4 text-center text-sm"
@@ -410,7 +419,8 @@ export default function Footer() {
             Designed with <span style={{ color: "#ff4b7d" }}>♥</span> for
             creative professionals.
           </p>
-        </motion.div>
+        </motion.div> */}
+        <BackgroundFooter/>
       </div>
     </motion.footer>
   );
