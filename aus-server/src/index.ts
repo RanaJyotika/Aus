@@ -9,6 +9,7 @@ import newsletterRoutes from './routes/newsletterRoutes';
 import blogRoutes from './routes/blogRoutes';
 import uploadRoutes from './routes/uploadRoutes';
 import albumRoutes from './routes/albumRoutes';
+import chat from './routes/chat';
 import cors from 'cors';
 import path from 'path';
 import fs from 'fs';
@@ -40,6 +41,7 @@ app.use('/api/newsletters', newsletterRoutes); // ✅ This will prefix all newsl
 app.use('/api/blogs', blogRoutes);
 app.use('/api', uploadRoutes);
 app.use('/api', albumRoutes);
+app.use('/api/chat', chat)
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);

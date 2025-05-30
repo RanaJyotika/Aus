@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect, useLayoutEffect } from "react";
 
 const STORAGE_KEY = "aiChatHistory";
-const OPENAI_API_KEY = process.env.VITE_OPENAI_API_KEY; // Vite style. Use process.env.REACT_APP_OPENAI_API_KEY for CRA
 
 const robotImage =
   "https://www.shutterstock.com/image-vector/happy-robot-3d-ai-character-600nw-2464455965.jpg";
@@ -23,8 +22,6 @@ const nurtureMenuOptions = [
 ];
 
 const whatsappNumber = "919660000146";
-const whatsappMessage =
-  "Hi, I'm visiting Nurture Childcare and would like to talk to an executive!";
 const whatsappUrl = `https://wa.me/${whatsappNumber}?text=Hi%2C%20I'm%20visiting%20Nurture%20Childcare%20and%20would%20like%20to%20talk%20to%20an%20executive!`;
 
 function formatTime(isoString?: string) {
@@ -33,7 +30,6 @@ function formatTime(isoString?: string) {
   return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 }
 
-// Format date as "Month day, Year" (e.g., "May 29, 2025")
 function formatDate(isoString?: string) {
   if (!isoString) return "";
   const date = new Date(isoString);
@@ -75,21 +71,16 @@ const ChatPopup: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
-  // showNurtureMenu: true if no chat history (fresh), false otherwise
   const [showNurtureMenu, setShowNurtureMenu] = useState(true);
-  // menuSelected: true if user has selected an option or resumed previous session
   const [menuSelected, setMenuSelected] = useState(false);
-
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Load chat history from localStorage
   useEffect(() => {
     try {
       const item = localStorage.getItem(STORAGE_KEY);
       if (item) {
         const parsed = JSON.parse(item);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          // Check if there is any user message
           const hasUserMessage = parsed.some(
             (msg: any) => msg.sender === "user"
           );
@@ -98,18 +89,15 @@ const ChatPopup: React.FC<{ onClose: () => void }> = ({ onClose }) => {
             setShowNurtureMenu(false);
             setMenuSelected(true);
           } else {
-            // No user messages: show menu, hide input
             setShowNurtureMenu(true);
             setMenuSelected(false);
             setMessages(parsed);
           }
         } else {
-          // No history: show menu, hide input
           setShowNurtureMenu(true);
           setMenuSelected(false);
         }
       } else {
-        // No history: show menu, hide input
         setShowNurtureMenu(true);
         setMenuSelected(false);
       }
@@ -119,12 +107,10 @@ const ChatPopup: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     }
   }, []);
 
-  // Save chat history
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
   }, [messages]);
 
-  // Auto scroll
   useLayoutEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isTyping]);
@@ -133,7 +119,6 @@ const ChatPopup: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     const messageToSend = customInput ?? input;
     if (!messageToSend.trim() || loading) return;
     setLoading(true);
-
     const newUserMsg = {
       _id: `user-${Date.now()}`,
       sender: "user",
@@ -160,19 +145,14 @@ const ChatPopup: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         })),
       ];
 
-      const res = await fetch("https://api.openai.com/v1/chat/completions", {
+      const res = await fetch("http://localhost:5000/api/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${OPENAI_API_KEY}`,
         },
-        body: JSON.stringify({
-          model: "gpt-3.5-turbo",
-          messages: openaiMsgs,
-          max_tokens: 350,
-          temperature: 0.7,
-        }),
+        body: JSON.stringify({ messages: openaiMsgs }),
       });
+
       const data = await res.json();
       const reply =
         data?.choices?.[0]?.message?.content ||
@@ -204,7 +184,6 @@ const ChatPopup: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   };
 
   const handleNurtureOption = (optionObj: { label: string; value: string }) => {
-    // Add user message for selected menu option
     const newUserMsg = {
       _id: `user-${Date.now()}`,
       sender: "user",
@@ -215,7 +194,6 @@ const ChatPopup: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     setMessages((msgs) => [...msgs, newUserMsg]);
     setShowNurtureMenu(false);
     setMenuSelected(true);
-    // Provide contextual guided bot response based on value
     let botResponse = "";
     switch (optionObj.value) {
       case "enroll_child":
@@ -248,7 +226,7 @@ const ChatPopup: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       },
     ]);
   };
-
+  
   return (
     <div className="fixed bottom-6 z-[9999] w-[380px] max-w-[96vw] h-[560px] max-h-[96vh] rounded-2xl bg-gradient-to-br from-[#d0e8f2] to-[#a6dcef] shadow-2xl flex flex-col overflow-hidden font-sans animate-fadeInUp left-1/2 -translate-x-1/2 right-auto md:right-6 md:left-auto md:translate-x-0">
       {/* Top Bar */}
