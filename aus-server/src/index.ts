@@ -10,6 +10,7 @@ import blogRoutes from './routes/blogRoutes';
 import uploadRoutes from './routes/uploadRoutes';
 import albumRoutes from './routes/albumRoutes';
 import founderRoutes from './routes/founderRoutes';
+import policyRoutes from './routes/policyRoutes';
 import chat from './routes/chat';
 import cors from 'cors';
 import path from 'path';
@@ -22,6 +23,7 @@ app.use(express.json({ limit: '10mb' })); // or higher -- REMOVE AFTER CLOUD😭
 app.use(express.urlencoded({ extended: true, limit: '10mb' })); // -- REMOVE AFTER CLOUD😭
 
 app.use(cors()); 
+app.use("/api/policies", policyRoutes); // Mount policy routes
 
 // Connect to MongoDB
 connectDB().then(() => {
