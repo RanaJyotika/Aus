@@ -8,6 +8,7 @@ import Blogs from "./Components/Home/Blogs";
 import BlogDetails from "./Components/Home/BlogsDetails";
 import Gallery from "./Components/Home/Gallery";
 import AlbumDetails from "./Components/Home/AlbumDetails";
+import Founder from "./Components/Home/Founder";
 
 interface ProtectedRouteProps {
   element: React.ReactNode;
@@ -35,18 +36,39 @@ const App = () => {
 
       {/* Home - Dashboard */}
       <Route path="/home" element={<ProtectedRoute element={<HomePage />} />} />
-      <Route path="/testimonials" element={<ProtectedRoute element={<Testimonials />} />} />
-      <Route path="/all-admins" element={<ProtectedRoute element={<ViewAdmin />} />} />
-      <Route path="/newsletter" element={<ProtectedRoute element={<Newsletter />} />} />
+      <Route
+        path="/testimonials"
+        element={<ProtectedRoute element={<Testimonials />} />}
+      />
+      <Route
+        path="/all-admins"
+        element={<ProtectedRoute element={<ViewAdmin />} />}
+      />
+      <Route
+        path="/newsletter"
+        element={<ProtectedRoute element={<Newsletter />} />}
+      />
       <Route path="/blogs" element={<ProtectedRoute element={<Blogs />} />} />
-      <Route path="/blogs/:id" element={<ProtectedRoute element={<BlogDetails />} />} />
-      <Route path="/gallery" element={<ProtectedRoute element={<Gallery />} />} />
+      <Route
+        path="/blogs/:id"
+        element={<ProtectedRoute element={<BlogDetails />} />}
+      />
+      <Route
+        path="/gallery"
+        element={<ProtectedRoute element={<Gallery />} />}
+      />
       <Route path="/gallery/:id" element={<AlbumDetails />} />
+      <Route
+        path="/founder"
+        element={<ProtectedRoute element={<Founder />} />}
+      />
+
+      {/* Redirect to home if authenticated */}
 
       {/* PNF later */}
       {/* <Route path="*" element={token ? <Navigate to="/home" /> : <Navigate to="/" />} /> */}
     </Routes>
-  )
+  );
 }
 
 export default App

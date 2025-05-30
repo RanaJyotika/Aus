@@ -13,6 +13,8 @@ export const getFounder = async (req: any, res: any) => {
 
 // POST /api/founder
 export const createFounder = async (req: any, res:any) => {
+  
+  console.log(req.body);
   const { name, title, bio, image, badges } = req.body;
 
   try {

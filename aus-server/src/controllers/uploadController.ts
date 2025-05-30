@@ -92,3 +92,35 @@ export const generateGalleryUploadURL = async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Failed to generate upload URL' });
   }
 };
+
+
+
+export const generateFounderUploadURL = async (req: Request, res: Response) => {
+  try {
+    const { filename, contentType } = req.body;
+
+    if (!filename || !contentType) {
+      return res
+        .status(400)
+        .json({ error: "Filename and contentType are required" });
+    }
+
+    const fileExt = filename.split(".").pop();
+    const fileName = `aus/founders/${uuid()}.${fileExt}`;
+
+    const params = {
+      Bucket: process.env.DO_SPACES_BUCKET!,
+      Key: fileName,
+      Expires: 60,
+      ContentType: contentType,
+    };
+
+    const uploadURL = await s3.getSignedUrlPromise("putObject", params);
+    const fileUrl = `https://${process.env.DO_SPACES_BUCKET}.${process.env.DO_SPACES_ENDPOINT}/${fileName}`;
+
+    res.json({ uploadURL, fileUrl });
+  } catch (err) {
+    console.error("Failed to generate founder upload URL:", err);
+    res.status(500).json({ error: "Failed to generate founder upload URL" });
+  }
+};

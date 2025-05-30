@@ -24,24 +24,29 @@ const HomeContent = () => {
 
   const features = [
     {
-      title: 'Testimonials',
-      route: '/testimonials',
-      image: 'https://cdn-icons-png.flaticon.com/512/3237/3237472.png',
+      title: "Testimonials",
+      route: "/testimonials",
+      image: "https://cdn-icons-png.flaticon.com/512/3237/3237472.png",
     },
     {
-      title: 'Gallery',
-      route: '/gallery',
-      image: 'https://cdn-icons-png.flaticon.com/512/1040/1040230.png',
+      title: "Gallery",
+      route: "/gallery",
+      image: "https://cdn-icons-png.flaticon.com/512/1040/1040230.png",
     },
     {
-      title: 'Newsletter',
-      route: '/newsletter',
-      image: 'https://cdn-icons-png.flaticon.com/512/2099/2099190.png',
+      title: "Newsletter",
+      route: "/newsletter",
+      image: "https://cdn-icons-png.flaticon.com/512/2099/2099190.png",
     },
     {
-      title: 'Blogs',
-      route: '/blogs',
-      image: 'https://cdn-icons-png.flaticon.com/512/2620/2620986.png',
+      title: "Blogs",
+      route: "/blogs",
+      image: "https://cdn-icons-png.flaticon.com/512/2620/2620986.png",
+    },
+    {
+      title: "Founder",
+      route: "/founder",
+      image: "https://cdn-icons-png.flaticon.com/512/2620/2620986.png",
     },
   ];
 
