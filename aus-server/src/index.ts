@@ -9,6 +9,7 @@ import newsletterRoutes from './routes/newsletterRoutes';
 import blogRoutes from './routes/blogRoutes';
 import uploadRoutes from './routes/uploadRoutes';
 import albumRoutes from './routes/albumRoutes';
+import founderRoutes from './routes/founderRoutes';
 import chat from './routes/chat';
 import cors from 'cors';
 import path from 'path';
@@ -42,6 +43,7 @@ app.use('/api/blogs', blogRoutes);
 app.use('/api', uploadRoutes);
 app.use('/api', albumRoutes);
 app.use('/api/chat', chat)
+app.use("/api/founder", founderRoutes);
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
